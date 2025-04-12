@@ -1,0 +1,24 @@
+# Main Dependencies
+langchain
+langchain-anthropic
+langchain-groq
+langchain-openai
+langchain-deepseek
+langgraph
+pandas
+numpy
+python-dotenv
+matplotlib
+tabulate
+colorama
+questionary
+rich
+langchain-google-genai
+google-ai-generativelanguage==0.6.15
+streamlit
+
+# Development Dependencies
+pytest
+black
+isort
+flake8
