@@ -3,7 +3,7 @@ from graph.state import AgentState, show_agent_reasoning
 from tools.api import get_financial_metrics, get_market_cap, search_line_items
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 import json
 from typing_extensions import Literal #literal ensures that a variable can only take one value from specified values
 from utils.progress import progress
@@ -19,7 +19,7 @@ class BenGrahamSignal(BaseModel):
     reasoning: str
 
 
-def ben_graham_agent(state: AgentState): #state is an instance of AgentState that contains all necessary input data and metadata.
+def ben_graham_agent(state: AgentState):
     """
     Analyzes stocks using Benjamin Graham's classic value-investing principles:
     1. Earnings stability over multiple years.

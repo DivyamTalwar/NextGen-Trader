@@ -6,20 +6,21 @@ from langchain_core.messages import BaseMessage
 
 import json
 
-
+""" ***a and ***b means take everything from a and then everything from b. no duplicates. Output will be dict only """
 def merge_dicts(a: dict[str, any], b: dict[str, any]) -> dict[str, any]:
     return {**a, **b}
 
 
 # Define agent state
 class AgentState(TypedDict):
-    messages: Annotated[Sequence[BaseMessage], operator.add]
+    messages: Annotated[Sequence[BaseMessage], operator.add] #will contain the list of messages as value 
     data: Annotated[dict[str, any], merge_dicts]
     metadata: Annotated[dict[str, any], merge_dicts]
 
 
+""" This function is defined to print out the output nicely along with the AI Agent Name """
 def show_agent_reasoning(output, agent_name):
-    print(f"\n{'=' * 10} {agent_name.center(28)} {'=' * 10}")
+    print(f"\n{'=' * 10} {agent_name.center(28)} {'=' * 10}") #prints the header with agent name in the middle(*** agentname ***(10)
 
     def convert_to_serializable(obj):
         if hasattr(obj, "to_dict"):  # Handle Pandas Series/DataFrame

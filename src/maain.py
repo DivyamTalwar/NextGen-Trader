@@ -160,7 +160,7 @@ st.markdown(
 st.markdown("<h1>AI-Powered Hedge Fund Simulator</h1>", unsafe_allow_html=True)
 
 # ----- Info Node for Models -----
-st.info("Note: Please use Google models (e.g., Gemini‑2.0‑Flash, Gemini‑2.0‑Pro) or GROQ models (e.g., DeepSeek, Llama3). OpenAI keys are not rechargeable, so consider these free models.")
+st.info("Note: Please use Google models GROQ models (llama-3.3-70b-versatile) For Best Results. OpenAI keys are not rechargeable, so consider these free models.")
 
 # Sidebar: Configuration Section
 st.sidebar.title("Configuration")
