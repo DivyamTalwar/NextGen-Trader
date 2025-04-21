@@ -32,6 +32,7 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+    /* General styling */
     body {
         font-family: 'Roboto', sans-serif;
         background-color: #0e1117;
@@ -81,10 +82,7 @@ st.markdown(
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .stTextInput>div>div>input,
-    .stNumberInput>div>div>div>input,
-    .stMultiSelect>div>div>div,
-    .stSelectbox>div>div>div {
+    .stTextInput>div>div>input {
         background-color: #1e2532;
         color: #ffffff;
         border-radius: 8px;
@@ -92,6 +90,33 @@ st.markdown(
         padding: 12px;
         font-size: 16px;
         transition: border-color 0.3s ease;
+    }
+
+    .stNumberInput>div>div>div>input {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #4d596b;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .stMultiSelect>div>div>div {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #4d596b;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .stSelectbox>div>div>div {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #4d596b;
+        padding: 12px;
+        font-size: 16px;
     }
 
     .stCheckbox>label {
@@ -112,12 +137,7 @@ st.markdown(
         background-color: #1e2532;
     }
 
-    .css-1d391kg p,
-    .css-1d391kg h1,
-    .css-1d391kg h2,
-    .css-1d391kg h3,
-    .css-1d391kg h4,
-    .css-1d391kg h5 {
+    .css-1d391kg p, .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4, .css-1d391kg h5 {
         color: #ffffff;
     }
 
@@ -162,6 +182,7 @@ st.markdown(
         overflow-x: auto;
     }
 
+    /* Animations */
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -180,6 +201,7 @@ st.markdown(
         animation: slideIn 1s ease-out;
     }
 
+    /* Parameter Card */
     .parameter-card {
         background-color: rgba(30, 37, 50, 0.8);
         border-radius: 12px;
@@ -218,6 +240,7 @@ st.markdown(
         color: #bbbbbb;
     }
 
+    /* Trading Decisions and Analyst Signals */
     .output-section {
         background-color: rgba(30, 37, 50, 0.8);
         border-radius: 12px;
@@ -235,27 +258,51 @@ st.markdown(
         font-size: 24px;
     }
 
+    /* Plotly Chart Styling */
     .plotly-chart {
         margin-bottom: 20px;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
+
+    /* Recommendation Animation */
+    .recommendation {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        animation: recommend 1s infinite alternate;
+    }
+
+    .recommendation.buy {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .recommendation.sell {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    @keyframes recommend {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-
 # Title with Fade-In Animation
 st.markdown("<h1 class='fade-in'>AI-Powered Hedge Fund Simulator</h1>", unsafe_allow_html=True)
-
 
 # Info Node for Models
 st.info("Note: Please use GROQ models (llama-3.3-70b-versatile) For Best Results. OpenAI keys are not rechargeable, so consider these free models.")
 
-
-# Sidebar: Configuration Section
 # Sidebar: Configuration Section
 with st.sidebar:
     st.title("Configuration")
@@ -309,11 +356,13 @@ else:
 # Simulation Parameters Card
 st.markdown("""
 <div class="parameter-card fade-in">
-    <h3>Simulation Parameters</h3>
+  <h3>Simulation Parameters</h3>
 </div>
 """, unsafe_allow_html=True)
+
 with st.container():
     col1, col2 = st.columns(2)
+
     with col1:
         st.markdown(f"""
         <div class="parameter-card fade-in">
@@ -331,6 +380,7 @@ with st.container():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
     with col2:
         st.markdown(f"""
         <div class="parameter-card fade-in">
@@ -351,10 +401,10 @@ with st.container():
 
 st.markdown(f"""
 <div class="parameter-card fade-in">
-    <div class="parameter-item">
-        <span class="parameter-label">Selected Analysts:</span>
-        <span class="parameter-value">{', '.join(selected_analysts)}</span>
-    </div>
+  <div class="parameter-item">
+    <span class="parameter-label">Selected Analysts:</span>
+    <span class="parameter-value">{', '.join(selected_analysts)}</span>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -383,6 +433,7 @@ def create_workflow(selected_analysts=None):
     workflow = StateGraph(AgentState)
     workflow.add_node("start_node", lambda state: state)
     analyst_nodes = get_analyst_nodes()
+
     if selected_analysts is None or not selected_analysts:
         selected_analysts = list(analyst_nodes.keys())
 
@@ -397,19 +448,36 @@ def create_workflow(selected_analysts=None):
     for analyst_key in selected_analysts:
         node_name = analyst_nodes[analyst_key][0]
         workflow.add_edge(node_name, "risk_management_agent")
-        workflow.add_edge("risk_management_agent", "portfolio_management_agent")
-        workflow.add_edge("portfolio_management_agent", END)
 
+    workflow.add_edge("risk_management_agent", "portfolio_management_agent")
+    workflow.add_edge("portfolio_management_agent", END)
     workflow.set_entry_point("start_node")
+
     return workflow
 
 workflow = create_workflow(selected_analysts)
 app = workflow.compile()
 
+# Show Agent Graph (if checked)
 if show_agent_graph:
     file_path = "agent_graph.png"
     save_graph_as_png(app, file_path)
     st.image(file_path, caption="Agent Graph", use_column_width=True)
+
+# Function to display animated recommendation
+def display_recommendation(ticker, action):
+    if action == "buy":
+        st.markdown(f"""
+        <div class="recommendation buy">
+            BUY {ticker}! 🚀
+        </div>
+        """, unsafe_allow_html=True)
+    elif action == "sell":
+        st.markdown(f"""
+        <div class="recommendation sell">
+            SELL {ticker}! 📉
+        </div>
+        """, unsafe_allow_html=True)
 
 # Run simulation button
 if st.button("Run Hedge Fund Simulation"):
@@ -431,10 +499,10 @@ if st.button("Run Hedge Fund Simulation"):
                     "model_provider": model_provider,
                 },
             })
+
             decisions = json.loads(final_state["messages"][-1].content)
             analyst_signals = final_state["data"]["analyst_signals"]
 
-            # Output Section
             st.markdown("<div class='output-section'>", unsafe_allow_html=True)
             st.markdown("<h3>Trading Decisions</h3>", unsafe_allow_html=True)
             st.json(decisions)
@@ -445,16 +513,21 @@ if st.button("Run Hedge Fund Simulation"):
             st.json(analyst_signals)
             st.markdown("</div>", unsafe_allow_html=True)
 
-            # Visualization Example (assuming decisions contain buy/sell signals)
+            for ticker, action in decisions.items():
+                display_recommendation(ticker, action)
+
+            # Visualize decisions
             try:
-                df_decisions = pd.DataFrame(decisions)
+                df_decisions = pd.DataFrame(decisions, index=[0]).transpose().reset_index()
+                df_decisions.columns = ['Ticker', 'Signal']
                 for ticker in tickers:
-                    if ticker in df_decisions.columns:
-                        fig = px.bar(df_decisions, x=df_decisions.index, y=ticker,
+                    if ticker in df_decisions['Ticker'].values:
+                        ticker_data = df_decisions[df_decisions['Ticker'] == ticker]
+                        fig = px.bar(ticker_data, x='Ticker', y='Signal',
                                      title=f"Trading Decisions for {ticker}",
-                                     labels={'x': 'Decision Index', 'y': 'Signal'})
+                                     labels={'Ticker': 'Ticker', 'Signal': 'Signal'})
                         fig.update_layout(template="plotly_dark")
-                        st.plotly_chart(fig, use_container_width=True, className="plotly-chart")
+                        st.plotly_chart(fig, use_container_width=True)
             except Exception as e:
                 st.error(f"Error creating visualization: {e}")
 
@@ -462,5 +535,3 @@ if st.button("Run Hedge Fund Simulation"):
             st.error(f"Error during simulation: {e}")
         finally:
             progress.stop()
-
-
