@@ -20,6 +20,7 @@ langchain-google-genai
 google-ai-generativelanguage
 streamlit
 lottie
+plotly
 
 
 
