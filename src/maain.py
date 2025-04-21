@@ -19,10 +19,14 @@ from utils.progress import progress
 from llm.models import LLM_ORDER, get_model_info
 from utils.visualize import save_graph_as_png
 from dotenv import load_dotenv
+import pandas as pd
+import plotly.express as px
+
 
 load_dotenv()
 
-# Custom CSS for styling
+
+# Custom CSS for enhanced UI
 st.markdown(
     """
     <style>
@@ -41,70 +45,58 @@ st.markdown(
     h1 {
         color: #f0ab51;
         text-align: center;
-        padding: 20px 0;
-        margin-bottom: 30px;
+        padding: 30px 0;
+        margin-bottom: 40px;
         font-weight: 700;
         letter-spacing: 1px;
-        text-shadow: 2px 2px 4px #000000;
+        text-shadow: 3px 3px 5px #000000;
+        animation: fadeIn 2s ease-in-out;
     }
 
     h3 {
         color: #f0ab51;
         font-weight: 700;
-        margin-top: 25px;
-        margin-bottom: 10px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #f0ab51;
+        padding-bottom: 10px;
     }
 
     .stButton>button {
         color: #ffffff;
         background-color: #f0ab51;
         border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 18px;
         font-weight: 700;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
 
     .stButton>button:hover {
         background-color: #d48b36;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .stTextInput>div>div>input {
-        background-color: #1e2532;
-        color: #ffffff;
-        border-radius: 5px;
-        border: 1px solid #4d596b;
-        padding: 10px;
-    }
-
-    .stNumberInput>div>div>div>input {
-        background-color: #1e2532;
-        color: #ffffff;
-        border-radius: 5px;
-        border: 1px solid #4d596b;
-        padding: 10px;
-    }
-
-    .stMultiSelect>div>div>div {
-        background-color: #1e2532;
-        color: #ffffff;
-        border-radius: 5px;
-        border: 1px solid #4d596b;
-        padding: 10px;
-    }
-
+    .stTextInput>div>div>input,
+    .stNumberInput>div>div>div>input,
+    .stMultiSelect>div>div>div,
     .stSelectbox>div>div>div {
         background-color: #1e2532;
         color: #ffffff;
-        border-radius: 5px;
+        border-radius: 8px;
         border: 1px solid #4d596b;
-        padding: 10px;
+        padding: 12px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
     }
 
     .stCheckbox>label {
         color: #ffffff;
+        font-size: 16px;
     }
 
     .stSidebar {
@@ -120,14 +112,19 @@ st.markdown(
         background-color: #1e2532;
     }
 
-    .css-1d391kg p, .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4, .css-1d391kg h5 {
+    .css-1d391kg p,
+    .css-1d391kg h1,
+    .css-1d391kg h2,
+    .css-1d391kg h3,
+    .css-1d391kg h4,
+    .css-1d391kg h5 {
         color: #ffffff;
     }
 
     .stExpander {
         border: 1px solid #4d596b;
-        border-radius: 5px;
-        margin-bottom: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
     }
 
     .stExpander>div[data-testid="stVerticalBlock"] {
@@ -150,17 +147,18 @@ st.markdown(
         background-color: #1e2532;
         border-left: 5px solid #f0ab51;
         color: #ffffff;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 5px;
+        padding: 18px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+        font-size: 16px;
     }
 
     .stJson {
         background-color: #1e2532;
         color: #ffffff;
-        border-radius: 5px;
-        padding: 20px;
-        margin-bottom: 20px;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
         overflow-x: auto;
     }
 
@@ -170,28 +168,45 @@ st.markdown(
     }
 
     .fade-in {
-        animation: fadeIn 1s ease-in-out;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .slide-in {
+        animation: slideIn 1s ease-out;
     }
 
     .parameter-card {
         background-color: rgba(30, 37, 50, 0.8);
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .parameter-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
     }
 
     .parameter-card h3 {
         color: #f0ab51;
-        border-bottom: 2px solid #f0ab51;
-        padding-bottom: 10px;
-        margin-bottom: 15px;
+        border-bottom: 3px solid #f0ab51;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        font-size: 24px;
     }
 
     .parameter-item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        font-size: 18px;
     }
 
     .parameter-label {
@@ -202,17 +217,45 @@ st.markdown(
     .parameter-value {
         color: #bbbbbb;
     }
+
+    .output-section {
+        background-color: rgba(30, 37, 50, 0.8);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        animation: slideIn 1s ease-out;
+    }
+
+    .output-section h3 {
+        color: #f0ab51;
+        border-bottom: 3px solid #f0ab51;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .plotly-chart {
+        margin-bottom: 20px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
+
 # Title with Fade-In Animation
 st.markdown("<h1 class='fade-in'>AI-Powered Hedge Fund Simulator</h1>", unsafe_allow_html=True)
+
 
 # Info Node for Models
 st.info("Note: Please use GROQ models (llama-3.3-70b-versatile) For Best Results. OpenAI keys are not rechargeable, so consider these free models.")
 
+
+# Sidebar: Configuration Section
 # Sidebar: Configuration Section
 with st.sidebar:
     st.title("Configuration")
@@ -269,7 +312,6 @@ st.markdown("""
     <h3>Simulation Parameters</h3>
 </div>
 """, unsafe_allow_html=True)
-
 with st.container():
     col1, col2 = st.columns(2)
     with col1:
@@ -341,7 +383,6 @@ def create_workflow(selected_analysts=None):
     workflow = StateGraph(AgentState)
     workflow.add_node("start_node", lambda state: state)
     analyst_nodes = get_analyst_nodes()
-
     if selected_analysts is None or not selected_analysts:
         selected_analysts = list(analyst_nodes.keys())
 
@@ -390,17 +431,36 @@ if st.button("Run Hedge Fund Simulation"):
                     "model_provider": model_provider,
                 },
             })
-
             decisions = json.loads(final_state["messages"][-1].content)
             analyst_signals = final_state["data"]["analyst_signals"]
 
+            # Output Section
+            st.markdown("<div class='output-section'>", unsafe_allow_html=True)
             st.markdown("<h3>Trading Decisions</h3>", unsafe_allow_html=True)
             st.json(decisions)
+            st.markdown("</div>", unsafe_allow_html=True)
 
+            st.markdown("<div class='output-section'>", unsafe_allow_html=True)
             st.markdown("<h3>Analyst Signals</h3>", unsafe_allow_html=True)
             st.json(analyst_signals)
+            st.markdown("</div>", unsafe_allow_html=True)
+
+            # Visualization Example (assuming decisions contain buy/sell signals)
+            try:
+                df_decisions = pd.DataFrame(decisions)
+                for ticker in tickers:
+                    if ticker in df_decisions.columns:
+                        fig = px.bar(df_decisions, x=df_decisions.index, y=ticker,
+                                     title=f"Trading Decisions for {ticker}",
+                                     labels={'x': 'Decision Index', 'y': 'Signal'})
+                        fig.update_layout(template="plotly_dark")
+                        st.plotly_chart(fig, use_container_width=True, className="plotly-chart")
+            except Exception as e:
+                st.error(f"Error creating visualization: {e}")
 
         except Exception as e:
             st.error(f"Error during simulation: {e}")
         finally:
             progress.stop()
+
+
