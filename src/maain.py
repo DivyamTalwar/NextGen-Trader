@@ -2,7 +2,6 @@ import streamlit as st
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
 from langchain_core.messages import HumanMessage
 from graph.state import AgentState
 from langgraph.graph import END, StateGraph
@@ -19,182 +18,230 @@ from utils.analysts import ANALYST_ORDER, get_analyst_nodes
 from utils.progress import progress
 from llm.models import LLM_ORDER, get_model_info
 from utils.visualize import save_graph_as_png
-
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# ----- Enhanced Professional & Eye-Catching UI Styling -----
+# Custom CSS for styling
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-    /* Overall body settings */
-    html, body, [class*="css"]  {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #16222A, #3A6073);
-        color: #E0E0E0;
-        margin: 0;
-        padding: 0;
-    }
-    
-    /* Main container styling */
-    .reportview-container .main {
-        background: transparent;
-        padding: 2rem;
-    }
-
-    /* Sidebar styling */
-    .css-1d391kg {  
-        background: linear-gradient(135deg, #2b5876, #4e4376);
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #0e1117;
         color: #ffffff;
-        border: none;
     }
-    .css-1d391kg .sidebar-content {
-        background: transparent;
+
+    .stApp {
+        background-color: #0e1117;
     }
-    [data-testid="stSidebar"] .css-1d391kg {
-        background: linear-gradient(135deg, #2b5876, #4e4376);
-    }
-    
-    /* Title Styling */
+
     h1 {
-        font-weight: 700;
-        font-size: 3.2em;
-        color: #00C5B3;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        color: #f0ab51;
         text-align: center;
-        margin-bottom: 1rem;
-    }
-    
-    /* Info block styling */
-    .css-1lsmgbg {
-        background-color: #222;
-        border-left: 8px solid #00C5B3;
-        font-size: 1.1em;
-    }
-    
-    /* Buttons styling */
-    div.stButton > button {
-        background-color: #00C5B3;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        padding: 14px 28px;
-        font-size: 1em;
-        font-weight: 600;
-        text-transform: uppercase;
+        padding: 20px 0;
+        margin-bottom: 30px;
+        font-weight: 700;
         letter-spacing: 1px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
-        transition: all 0.3s ease;
+        text-shadow: 2px 2px 4px #000000;
     }
-    div.stButton > button:hover {
-        background-color: #00a39b;
-        transform: translateY(-3px);
-        box-shadow: 0px 7px 12px rgba(0, 0, 0, 0.5);
+
+    h3 {
+        color: #f0ab51;
+        font-weight: 700;
+        margin-top: 25px;
+        margin-bottom: 10px;
     }
-    
-    /* Input fields styling */
-    input[type="text"],
-    input[type="number"] {
-        border-radius: 8px;
-        border: 1px solid #ccc;
+
+    .stButton>button {
+        color: #ffffff;
+        background-color: #f0ab51;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .stButton>button:hover {
+        background-color: #d48b36;
+    }
+
+    .stTextInput>div>div>input {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 5px;
+        border: 1px solid #4d596b;
         padding: 10px;
-        background: #fdfdfd;
-        color: #333;
-        font-size: 1em;
     }
-    
-    /* Multiselect and selectbox styling */
-    .css-1ex4k6z, .css-1hwfws3 {
-        border-radius: 8px;
-        padding: 8px;
-        font-size: 1em;
+
+    .stNumberInput>div>div>div>input {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 5px;
+        border: 1px solid #4d596b;
+        padding: 10px;
     }
-    
-    /* Simulation Parameters Card Styling */
-    .param-card {
-        background: rgba(0, 0, 0, 0.5);
-        padding: 25px;
-        border-radius: 15px;
-        margin: 2rem 0;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+
+    .stMultiSelect>div>div>div {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 5px;
+        border: 1px solid #4d596b;
+        padding: 10px;
     }
-    .param-card h2 {
-        color: #00C5B3;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        font-size: 2.2em;
-        border-bottom: 2px solid #00C5B3;
-        padding-bottom: 0.5rem;
+
+    .stSelectbox>div>div>div {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 5px;
+        border: 1px solid #4d596b;
+        padding: 10px;
     }
-    .param-card ul {
-        list-style: disc;
-        margin-left: 20px;
+
+    .stCheckbox>label {
+        color: #ffffff;
     }
-    .param-card li {
-        margin: 12px 0;
-        font-size: 1.2em;
+
+    .stSidebar {
+        background-color: #1e2532;
+        color: #ffffff;
     }
-    .param-label {
-        color: #00C5B3;
-        font-weight: 700;
-        margin-right: 0.5rem;
+
+    .stSidebar h2 {
+        color: #f0ab51;
     }
-    .param-value {
-        font-weight: 600;
+
+    .css-1d391kg {
+        background-color: #1e2532;
     }
-    /* Custom bullet list styling for nested lists */
-    .nested-list {
-        list-style: '▹ '; 
-        margin-left: 2rem;
-        padding-left: 0.5rem;
+
+    .css-1d391kg p, .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4, .css-1d391kg h5 {
+        color: #ffffff;
+    }
+
+    .stExpander {
+        border: 1px solid #4d596b;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .stExpander>div[data-testid="stVerticalBlock"] {
+        background-color: #1e2532;
+        color: #ffffff;
+    }
+
+    details[open] summary:before {
+        content: "▼";
+        color: #f0ab51;
+    }
+
+    details summary:before {
+        content: "▶";
+        color: #f0ab51;
+        margin-right: 7px;
+    }
+
+    .stInfo {
+        background-color: #1e2532;
+        border-left: 5px solid #f0ab51;
+        color: #ffffff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .stJson {
+        background-color: #1e2532;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .parameter-card {
+        background-color: rgba(30, 37, 50, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .parameter-card h3 {
+        color: #f0ab51;
+        border-bottom: 2px solid #f0ab51;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .parameter-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .parameter-label {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .parameter-value {
+        color: #bbbbbb;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Title
-st.markdown("<h1>AI-Powered Hedge Fund Simulator</h1>", unsafe_allow_html=True)
+# Title with Fade-In Animation
+st.markdown("<h1 class='fade-in'>AI-Powered Hedge Fund Simulator</h1>", unsafe_allow_html=True)
 
-# ----- Info Node for Models -----
+# Info Node for Models
 st.info("Note: Please use GROQ models (llama-3.3-70b-versatile) For Best Results. OpenAI keys are not rechargeable, so consider these free models.")
 
 # Sidebar: Configuration Section
-st.sidebar.title("Configuration")
+with st.sidebar:
+    st.title("Configuration")
 
-with st.sidebar.expander("Basic Settings", expanded=True):
-    initial_cash = st.number_input("Initial Cash", value=100000.0, step=1000.0, format="%.2f")
-    margin_requirement = st.number_input("Margin Requirement", value=0.0, step=1.0, format="%.2f")
-    # Revert ticker input back to text input
-    tickers_input = st.text_input("Tickers (comma-separated)", value="AAPL, MSFT, GOOGL")
+    with st.expander("Basic Settings", expanded=True):
+        initial_cash = st.number_input("Initial Cash", value=100000.0, step=1000.0, format="%.2f")
+        margin_requirement = st.number_input("Margin Requirement", value=0.0, step=1.0, format="%.2f")
+        tickers_input = st.text_input("Tickers (comma-separated)", value="AAPL, MSFT, GOOGL")
 
-with st.sidebar.expander("Date Settings", expanded=True):
-    start_date_input = st.text_input("Start Date (YYYY-MM-DD)", value="")
-    end_date_input = st.text_input("End Date (YYYY-MM-DD)", value=datetime.now().strftime("%Y-%m-%d"))
+    with st.expander("Date Settings", expanded=True):
+        start_date_input = st.text_input("Start Date (YYYY-MM-DD)", value="")
+        end_date_input = st.text_input("End Date (YYYY-MM-DD)", value=datetime.now().strftime("%Y-%m-%d"))
 
-with st.sidebar.expander("Advanced Options", expanded=False):
-    show_reasoning = st.checkbox("Show Reasoning", value=False)
-    show_agent_graph = st.checkbox("Show Agent Graph", value=False)
-    
-    # Analyst selection using multiselect (dropdown style remains)
+    with st.expander("Advanced Options", expanded=False):
+        show_reasoning = st.checkbox("Show Reasoning", value=False)
+        show_agent_graph = st.checkbox("Show Agent Graph", value=False)
+
     analyst_choices = [value for display, value in ANALYST_ORDER]
     selected_analysts = st.multiselect("Select AI Analysts", options=analyst_choices, default=analyst_choices)
 
-    # Model selection using selectbox
     model_choice = st.selectbox("Select LLM Model", options=[value for display, value, _ in LLM_ORDER])
     model_info = get_model_info(model_choice)
-    if model_info:
-        model_provider = model_info.provider.value
-    else:
-        model_provider = "Unknown"
+    model_provider = model_info.provider.value if model_info else "Unknown"
     st.markdown(f"**Selected Model:** {model_choice} ({model_provider})")
 
-# Process tickers input from text field
+# Process tickers input
 tickers = [ticker.strip() for ticker in tickers_input.split(",") if ticker.strip()]
 
+# Date validation and processing
 if not end_date_input:
     end_date = datetime.now().strftime("%Y-%m-%d")
 else:
@@ -216,34 +263,58 @@ else:
         st.error("Start date must be in YYYY-MM-DD format")
         st.stop()
 
-# ----- Display Simulation Parameters in a Styled Card (as bullet lists) -----
-st.markdown(
-    f"""
-    <div class="param-card">
-      <h2>Simulation Parameters</h2>
-      <ul>
-         <li>
-             <span class="param-label">Tickers:</span>
-             <ul class="nested-list">
-                 {''.join([f"<li class='param-value'>{ticker}</li>" for ticker in tickers])}
-             </ul>
-         </li>
-         <li><span class="param-label">Start Date:</span> <span class="param-value">{start_date}</span></li>
-         <li><span class="param-label">End Date:</span> <span class="param-value">{end_date}</span></li>
-         <li><span class="param-label">Initial Cash:</span> <span class="param-value">${initial_cash:,.2f}</span></li>
-         <li><span class="param-label">Margin Requirement:</span> <span class="param-value">{margin_requirement}</span></li>
-         <li>
-             <span class="param-label">Selected Analysts:</span>
-             <ul class="nested-list">
-                 {''.join([f"<li class='param-value'>{analyst}</li>" for analyst in selected_analysts])}
-             </ul>
-         </li>
-         <li><span class="param-label">LLM Model:</span> <span class="param-value">{model_choice} ({model_provider})</span></li>
-      </ul>
+# Simulation Parameters Card
+st.markdown("""
+<div class="parameter-card fade-in">
+    <h3>Simulation Parameters</h3>
+</div>
+""", unsafe_allow_html=True)
+
+with st.container():
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"""
+        <div class="parameter-card fade-in">
+            <div class="parameter-item">
+                <span class="parameter-label">Tickers:</span>
+                <span class="parameter-value">{', '.join(tickers)}</span>
+            </div>
+            <div class="parameter-item">
+                <span class="parameter-label">Start Date:</span>
+                <span class="parameter-value">{start_date}</span>
+            </div>
+            <div class="parameter-item">
+                <span class="parameter-label">Initial Cash:</span>
+                <span class="parameter-value">${initial_cash:,.2f}</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div class="parameter-card fade-in">
+            <div class="parameter-item">
+                <span class="parameter-label">End Date:</span>
+                <span class="parameter-value">{end_date}</span>
+            </div>
+            <div class="parameter-item">
+                <span class="parameter-label">Margin Requirement:</span>
+                <span class="parameter-value">{margin_requirement}</span>
+            </div>
+            <div class="parameter-item">
+                <span class="parameter-label">LLM Model:</span>
+                <span class="parameter-value">{model_choice} ({model_provider})</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.markdown(f"""
+<div class="parameter-card fade-in">
+    <div class="parameter-item">
+        <span class="parameter-label">Selected Analysts:</span>
+        <span class="parameter-value">{', '.join(selected_analysts)}</span>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+</div>
+""", unsafe_allow_html=True)
 
 # Build the portfolio dictionary
 portfolio = {
@@ -268,24 +339,26 @@ portfolio = {
 # Create workflow from selected analysts
 def create_workflow(selected_analysts=None):
     workflow = StateGraph(AgentState)
-    # Define start node
     workflow.add_node("start_node", lambda state: state)
     analyst_nodes = get_analyst_nodes()
+
     if selected_analysts is None or not selected_analysts:
         selected_analysts = list(analyst_nodes.keys())
-    # Add selected analyst nodes
+
     for analyst_key in selected_analysts:
         node_name, node_func = analyst_nodes[analyst_key]
         workflow.add_node(node_name, node_func)
         workflow.add_edge("start_node", node_name)
-    # Always add risk management and portfolio management nodes
+
     workflow.add_node("risk_management_agent", risk_management_agent)
     workflow.add_node("portfolio_management_agent", portfolio_management_agent)
+
     for analyst_key in selected_analysts:
         node_name = analyst_nodes[analyst_key][0]
         workflow.add_edge(node_name, "risk_management_agent")
-    workflow.add_edge("risk_management_agent", "portfolio_management_agent")
-    workflow.add_edge("portfolio_management_agent", END)
+        workflow.add_edge("risk_management_agent", "portfolio_management_agent")
+        workflow.add_edge("portfolio_management_agent", END)
+
     workflow.set_entry_point("start_node")
     return workflow
 
@@ -317,13 +390,16 @@ if st.button("Run Hedge Fund Simulation"):
                     "model_provider": model_provider,
                 },
             })
+
             decisions = json.loads(final_state["messages"][-1].content)
             analyst_signals = final_state["data"]["analyst_signals"]
 
-            st.markdown("### Trading Decisions")
+            st.markdown("<h3>Trading Decisions</h3>", unsafe_allow_html=True)
             st.json(decisions)
-            st.markdown("### Analyst Signals") 
+
+            st.markdown("<h3>Analyst Signals</h3>", unsafe_allow_html=True)
             st.json(analyst_signals)
+
         except Exception as e:
             st.error(f"Error during simulation: {e}")
         finally:

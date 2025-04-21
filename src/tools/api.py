@@ -4,6 +4,7 @@ import requests
 import streamlit as st
 
 from data.cache import get_cache
+#Pydantic models used to validate and parse api response    
 from data.models import (
     CompanyNews,
     CompanyNewsResponse,
@@ -20,10 +21,8 @@ from data.models import (
 # Global cache instance
 _cache = get_cache()
 
-
+#To get the prices of the given ticker between the specified details
 def get_prices(ticker: str, start_date: str, end_date: str) -> list[Price]:
-    """Fetch price data from cache or API."""
-    # Check cache first
     if cached_data := _cache.get_prices(ticker):
         # Filter cached data by date range and convert to Price objects
         filtered_data = [Price(**price) for price in cached_data if start_date <= price["time"] <= end_date]
@@ -33,8 +32,9 @@ def get_prices(ticker: str, start_date: str, end_date: str) -> list[Price]:
     # If not in cache or no data in range, fetch from API
     headers = {}
     if api_key := st.secrets.get("FINANCIAL_DATASETS_API_KEY", os.getenv("FINANCIAL_DATASETS_API_KEY")):
-        headers["X-API-KEY"] = api_key
+        headers["X-API-KEY"] = api_key #We added the api key to the header 
 
+    #modified the financial dataset url with the specified ticket and dates
     url = f"https://api.financialdatasets.ai/prices/?ticker={ticker}&interval=day&interval_multiplier=1&start_date={start_date}&end_date={end_date}"
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
@@ -44,10 +44,10 @@ def get_prices(ticker: str, start_date: str, end_date: str) -> list[Price]:
     price_response = PriceResponse(**response.json())
     prices = price_response.prices
 
-    if not prices:
+    if not prices:#No prices found return the empty list
         return []
 
-    # Cache the results as dicts
+    # Saves prices to cache and returns the parsed data
     _cache.set_prices(ticker, [p.model_dump() for p in prices])
     return prices
 
@@ -55,13 +55,13 @@ def get_prices(ticker: str, start_date: str, end_date: str) -> list[Price]:
 def get_financial_metrics(
     ticker: str,
     end_date: str,
-    period: str = "ttm",
-    limit: int = 10,
+    period: str = "ttm", #trailing twelve months.
+    limit: int = 10, #how many entries to return.
 ) -> list[FinancialMetrics]:
+    
     """Fetch financial metrics from cache or API."""
     # Check cache first
     if cached_data := _cache.get_financial_metrics(ticker):
-        # Filter cached data by date and limit
         filtered_data = [FinancialMetrics(**metric) for metric in cached_data if metric["report_period"] <= end_date]
         filtered_data.sort(key=lambda x: x.report_period, reverse=True)
         if filtered_data:

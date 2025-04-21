@@ -1,0 +1,31 @@
+# Main Dependencies
+# Main Dependencies for Core Functionality
+# Main Dependencies for Core Functionality
+# Main Dependencies for Core Functionality
+langchain
+langchain-anthropic
+langchain-groq
+langchain-openai  # Use the latest available version
+langchain-deepseek
+langgraph
+pandas
+numpy
+python-dotenv
+matplotlib
+tabulate
+colorama
+questionary
+rich
+langchain-google-genai
+google-ai-generativelanguage
+streamlit
+lottie
+
+
+
+# Development Dependencies
+# Development Dependencies for Code Quality and Testing
+pytest
+black
+isort
+flake8

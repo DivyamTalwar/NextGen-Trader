@@ -64,7 +64,7 @@ class FinancialMetrics(BaseModel):
 class FinancialMetricsResponse(BaseModel):
     financial_metrics: list[FinancialMetrics]
 
-
+""" A line item in finance = a specific entry in a financial report, like revenue, expenses, assets, etc"""
 class LineItem(BaseModel):
     ticker: str
     report_period: str
@@ -78,7 +78,8 @@ class LineItem(BaseModel):
 class LineItemResponse(BaseModel):
     search_results: list[LineItem]
 
-
+"""Insider Trade refers to the buying or selling of a company’s stock by someone who has access to non-public, material information 
+    about the company."""
 class InsiderTrade(BaseModel):
     ticker: str
     issuer: str | None

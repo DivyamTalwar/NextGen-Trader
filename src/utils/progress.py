@@ -1,3 +1,4 @@
+"""rich library allows you to add color,tables,clearn formats. TO make the text beautiful"""
 from rich.console import Console
 from rich.live import Live
 from rich.table import Table
