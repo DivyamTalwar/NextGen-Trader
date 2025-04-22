@@ -1,5 +1,3 @@
-"""Helper functions for LLM"""
-
 import json
 from typing import TypeVar, Type, Optional, Any
 from pydantic import BaseModel

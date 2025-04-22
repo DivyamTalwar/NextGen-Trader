@@ -16,6 +16,7 @@ rich
 langchain-google-genai
 google-ai-generativelanguage==0.6.15
 streamlit
+plotly
 
 # Development Dependencies
 pytest
