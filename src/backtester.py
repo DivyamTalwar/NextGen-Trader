@@ -40,15 +40,15 @@ class Backtester:
         initial_margin_requirement: float = 0.0,
     ):
         """
-        :param agent: The trading agent (Callable).
-        :param tickers: List of tickers to backtest.
-        :param start_date: Start date string (YYYY-MM-DD).
-        :param end_date: End date string (YYYY-MM-DD).
-        :param initial_capital: Starting portfolio cash.
-        :param model_name: Which LLM model name to use (gpt-4, etc).
-        :param model_provider: Which LLM provider (OpenAI, etc).
-        :param selected_analysts: List of analyst names or IDs to incorporate.
-        :param initial_margin_requirement: The margin ratio (e.g. 0.5 = 50%).
+        :agent: The trading agent (Callable).
+        :tickers: List of tickers to backtest.
+        :start_date: Start date string (YYYY-MM-DD).
+        :end_date: End date string (YYYY-MM-DD).
+        :initial_capital: Starting portfolio cash.
+        :model_name: Which LLM model name to use (gpt-4, etc).
+        :model_provider: Which LLM provider (OpenAI, etc).
+        :selected_analysts: List of analyst names or IDs to incorporate.
+        :initial_margin_requirement: The margin ratio (e.g. 0.5 = 50%).
         """
         self.agent = agent
         self.tickers = tickers
@@ -63,7 +63,7 @@ class Backtester:
         self.margin_ratio = initial_margin_requirement
 
         # Initialize portfolio with support for long/short positions
-        self.portfolio_values = []
+        self.portfolio_values = [] #store the portfolio value over time (used to track performance)
         self.portfolio = {
             "cash": initial_capital,
             "margin_used": 0.0,  # total margin usage across all short positions
@@ -98,8 +98,7 @@ class Backtester:
 
         if action == "buy":
             cost = quantity * current_price
-            if cost <= self.portfolio["cash"]:
-                # Weighted average cost basis for the new total
+            if cost <= self.portfolio["cash"]: #Means we have enough money to buy the shares
                 old_shares = position["long"]
                 old_cost_basis = position["long_cost_basis"]
                 new_shares = quantity
@@ -114,7 +113,7 @@ class Backtester:
                 self.portfolio["cash"] -= cost
                 return quantity
             else:
-                # Calculate maximum affordable quantity
+                # If we can’t afford full quantity calculate the maximum u can buy
                 max_quantity = int(self.portfolio["cash"] / current_price)
                 if max_quantity > 0:
                     cost = max_quantity * current_price
@@ -148,7 +147,8 @@ class Backtester:
                     position["long_cost_basis"] = 0.0
 
                 return quantity
-
+        
+        #Short selling: you borrow shares, sell them now, and hope to buy them back cheaper.
         elif action == "short":
             """
             Typical short sale flow:
@@ -208,7 +208,7 @@ class Backtester:
                     self.portfolio["cash"] -= margin_required
                     return max_quantity
                 return 0
-
+        #Covering a short means buying back the borrowed shares
         elif action == "cover":
             """
             When covering shares:
@@ -246,7 +246,7 @@ class Backtester:
                 return quantity
 
         return 0
-
+    #This function calculates the total portfolio value at the current market prices.
     def calculate_portfolio_value(self, current_prices):
         """
         Calculate total portfolio value, including:
@@ -257,21 +257,23 @@ class Backtester:
         total_value = self.portfolio["cash"]
 
         for ticker in self.tickers:
-            position = self.portfolio["positions"][ticker]
-            price = current_prices[ticker]
+            position = self.portfolio["positions"][ticker] #holds your long/short shares and cost basis.
+            price = current_prices[ticker] #is the live price for the ticker.
 
-            # Long position value
+            # Long position value (Multiply the number of long shares by current price to get the market value)
             long_value = position["long"] * price
             total_value += long_value
 
-            # Short position unrealized PnL = short_shares * (short_cost_basis - current_price)
+            # Short position unrealized PnL = Short PnL = (entry price − current price) × quantity
             if position["short"] > 0:
                 total_value += position["short"] * (position["short_cost_basis"] - price)
 
         return total_value
-
+    
+    
+    """This function preloads all data required for running a complete backtest. It ensures that everything from price history 
+    to financial fundamentals, insider trades, and news articles is available locally or in memory before the backtest starts.."""
     def prefetch_data(self):
-        """Pre-fetch all data needed for the backtest period."""
         print("\nPre-fetching data for the entire backtest period...")
 
         # Convert end_date string to datetime, fetch up to 1 year before
@@ -308,7 +310,8 @@ class Backtester:
     def run_backtest(self):
         # Pre-fetch all data at the start
         self.prefetch_data()
-
+        
+        #Generates all business days (weekdays excluding holidays) between start_date and end_date.
         dates = pd.date_range(self.start_date, self.end_date, freq="B")
         table_rows = []
         performance_metrics = {
@@ -329,7 +332,8 @@ class Backtester:
             self.portfolio_values = []
 
         for current_date in dates:
-            lookback_start = (current_date - timedelta(days=30)).strftime("%Y-%m-%d")
+            ##The agent needs the last 30 days of data to make decisions for the current date.
+            lookback_start = (current_date - timedelta(days=30)).strftime("%Y-%m-%d") 
             current_date_str = current_date.strftime("%Y-%m-%d")
             previous_date_str = (current_date - timedelta(days=1)).strftime("%Y-%m-%d")
 
@@ -337,7 +341,7 @@ class Backtester:
             if lookback_start == current_date_str:
                 continue
 
-            # Get current prices for all tickers
+            # Gets the latest price (up to current_date) for every ticker
             try:
                 current_prices = {
                     ticker: get_price_data(ticker, previous_date_str, current_date_str).iloc[-1]["close"]
@@ -351,6 +355,11 @@ class Backtester:
             # ---------------------------------------------------------------
             # 1) Execute the agent's trades
             # ---------------------------------------------------------------
+            """
+            Calls the AI agent, giving it a 30-day history and current portfolio. The agent returns:
+            decisions: trade actions like buy/sell/hold with quantities.
+            analyst_signals: sentiment signals (bullish, bearish, neutral) from various sources.
+            """
             output = self.agent(
                 tickers=self.tickers,
                 start_date=lookback_start,
@@ -378,7 +387,7 @@ class Backtester:
             # ---------------------------------------------------------------
             total_value = self.calculate_portfolio_value(current_prices)
 
-            # Also compute long/short exposures for final post‐trade state
+            # Also Measures how much capital is allocated to long and short positions.
             long_exposure = sum(
                 self.portfolio["positions"][t]["long"] * current_prices[t]
                 for t in self.tickers
@@ -395,7 +404,7 @@ class Backtester:
                 long_exposure / short_exposure if short_exposure > 1e-9 else float('inf')
             )
 
-            # Track each day's portfolio value in self.portfolio_values
+            # Records all key metrics for the day (total value, exposures, etc.).
             self.portfolio_values.append({
                 "Date": current_date,
                 "Portfolio Value": total_value,

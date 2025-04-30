@@ -476,5 +476,3 @@ def generate_cathie_wood_output(
         agent_name="cathie_wood_agent",
         default_factory=create_default_cathie_wood_signal,
     )
-
-# source: https://ark-invest.com

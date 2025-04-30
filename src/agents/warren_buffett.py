@@ -8,7 +8,7 @@ from tools.api import get_financial_metrics, get_market_cap, search_line_items
 from utils.llm import call_llm
 from utils.progress import progress
 
-
+"""Defines The output structure of each stock"""
 class WarrenBuffettSignal(BaseModel):
     signal: Literal["bullish", "bearish", "neutral"]
     confidence: float
@@ -27,10 +27,9 @@ def warren_buffett_agent(state: AgentState):
 
     for ticker in tickers:
         progress.update_status("warren_buffett_agent", ticker, "Fetching financial metrics")
-        # Fetch required data
-        metrics = get_financial_metrics(ticker, end_date, period="ttm", limit=5)
-
+        metrics = get_financial_metrics(ticker, end_date, period="ttm", limit=5) #fetch required data
         progress.update_status("warren_buffett_agent", ticker, "Gathering financial line items")
+        
         financial_line_items = search_line_items(
             ticker,
             [
