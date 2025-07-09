@@ -314,9 +314,9 @@ with st.sidebar:
         show_agent_graph = st.checkbox("Show Agent Graph", value=False)
 
     analyst_choices = [value for display, value in ANALYST_ORDER]
-    selected_analysts = st.multiselect("Select AI Analysts", options=analyst_choices, default=["warren_buffett", "ben_graham", "rakesh_jhunjhunwala", "sentiment_analyst"])
+    selected_analysts = st.multiselect("Select AI Analysts", options=analyst_choices, default=["warren_buffett", "sentiment_analyst"])
 
-    model_choice_name = st.selectbox("Select LLM Model", options=[model[1] for model in LLM_ORDER], index=0)
+    model_choice_name = st.selectbox("Select LLM Model", options=[model[1] for model in LLM_ORDER], index=11)
     
     # Find the selected model's info from LLM_ORDER
     selected_model = next((model for model in LLM_ORDER if model[1] == model_choice_name), None)

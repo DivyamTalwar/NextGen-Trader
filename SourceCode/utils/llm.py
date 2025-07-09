@@ -1,6 +1,7 @@
 """Helper functions for LLM"""
 
 import json
+import time
 from pydantic import BaseModel
 from llm.models import get_model, get_model_info
 from utils.progress import progress
@@ -67,6 +68,9 @@ def call_llm(
         except Exception as e:
             if agent_name:
                 progress.update_status(agent_name, None, f"Error - retry {attempt + 1}/{max_retries}")
+            
+            if "rate_limit_exceeded" in str(e):
+                time.sleep(20) # Wait for 20 seconds before retrying
 
             if attempt == max_retries - 1:
                 print(f"Error in LLM call after {max_retries} attempts: {e}")
