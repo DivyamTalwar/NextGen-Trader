@@ -1,12 +1,10 @@
-# Main Dependencies
-# Main Dependencies for Core Functionality
-# Main Dependencies for Core Functionality
-# Main Dependencies for Core Functionality
+
 langchain
 langchain-anthropic
 langchain-groq
-langchain-openai  # Use the latest available version
+langchain-openai
 langchain-deepseek
+langchain_ollama
 langgraph
 pandas
 numpy
@@ -22,10 +20,6 @@ streamlit
 lottie
 plotly
 
-
-
-# Development Dependencies
-# Development Dependencies for Code Quality and Testing
 pytest
 black
 isort
