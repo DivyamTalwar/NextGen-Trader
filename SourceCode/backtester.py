@@ -9,7 +9,7 @@ import numpy as np
 import itertools
 from .llm.models import LLM_ORDER,OLLAMA_LLM_ORDER,get_model_info,ModelProvider
 from .utils.analysts import ANALYST_ORDER
-from .maain import run_hedge_fund
+from .main import run_hedge_fund
 from .tools.api import(
     get_company_news,
     get_price_data,
