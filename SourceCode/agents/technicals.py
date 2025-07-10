@@ -107,9 +107,10 @@ def technical_analyst_agent(state: AgentState):
         )
 
         # Generate detailed analysis report for this ticker
+        final_confidence = min(combined_signal["confidence"] * 100, 80.0)
         technical_analysis[ticker] = {
             "signal": combined_signal["signal"],
-            "confidence": round(combined_signal["confidence"] * 100),
+            "confidence": final_confidence,
             "reasoning": {
                 "trend_following": {
                     "signal": trend_signals["signal"],

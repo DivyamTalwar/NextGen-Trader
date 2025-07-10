@@ -344,8 +344,8 @@ class Backtester:
                 model_provider=self.model_provider,
                 selected_analysts=self.selected_analysts,
             )
-            decisions = output["decisions"]
-            analyst_signals = output["analyst_signals"]
+            decisions = output.get("decisions", {})
+            analyst_signals = output.get("analyst_signals", {})
 
             # Execute trades for each ticker
             executed_trades = {}
@@ -523,10 +523,6 @@ class Backtester:
 
         print(f"\n{Fore.WHITE}{Style.BRIGHT}PORTFOLIO PERFORMANCE SUMMARY:{Style.RESET_ALL}")
         print(f"Total Return: {Fore.GREEN if total_return >= 0 else Fore.RED}{total_return:.2f}%{Style.RESET_ALL}")
-
-        # Print realized P&L for informational purposes only
-        total_realized_gains = sum(self.portfolio["realized_gains"][ticker]["long"] + self.portfolio["realized_gains"][ticker]["short"] for ticker in self.tickers)
-        print(f"Total Realized Gains/Losses: {Fore.GREEN if total_realized_gains >= 0 else Fore.RED}${total_realized_gains:,.2f}{Style.RESET_ALL}")
 
         # Plot the portfolio value over time
         plt.figure(figsize=(12, 6))

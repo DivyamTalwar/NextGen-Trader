@@ -16,7 +16,8 @@ class PortfolioManagerOutput(BaseModel):
 
 def make_deterministic_decision(signals_by_ticker: dict, max_shares: dict, portfolio: dict) -> PortfolioManagerOutput:
     """
-    Makes a deterministic trading decision based on aggregated analyst signals.
+    Makes a deterministic trading decision based on aggregated analyst signals,
+    weighted by confidence scores, and generates detailed, narrative-style reasoning.
     """
     decisions = {}
     for ticker, signals in signals_by_ticker.items():
@@ -25,62 +26,74 @@ def make_deterministic_decision(signals_by_ticker: dict, max_shares: dict, portf
                 action="hold",
                 quantity=0,
                 confidence=0.0,
-                reasoning=f"No signals available for {ticker}, defaulting to hold."
+                reasoning=f"Insufficient data: No analyst signals were provided for {ticker}."
             )
             continue
 
-        bullish_confidences = []
-        bearish_confidences = []
-        
+        weighted_bullish_score = 0
+        weighted_bearish_score = 0
+        bullish_analysts = []
+        bearish_analysts = []
+
         for agent, signal_data in signals.items():
+            confidence = signal_data.get('confidence', 0) / 100.0
+            agent_name = agent.replace("_agent", "").replace("_", " ").title()
             if signal_data.get('signal') == 'bullish':
-                bullish_confidences.append(signal_data.get('confidence', 0))
+                weighted_bullish_score += confidence
+                bullish_analysts.append(f"{agent_name} ({confidence:.0%})")
             elif signal_data.get('signal') == 'bearish':
-                bearish_confidences.append(signal_data.get('confidence', 0))
+                weighted_bearish_score += confidence
+                bearish_analysts.append(f"{agent_name} ({confidence:.0%})")
 
-        # New logic: Sum of confidences
-        total_bullish_score = sum(bullish_confidences)
-        total_bearish_score = sum(bearish_confidences)
-        
-        net_score = total_bullish_score - total_bearish_score
+        net_score = weighted_bullish_score - weighted_bearish_score
+        total_confidence_weight = weighted_bullish_score + weighted_bearish_score
 
-        # Determine action based on net score
-        action = "hold"
-        reasoning = f"Mixed signals for {ticker}. Net score: {net_score:.2f}. Holding position."
-        
-        # Use the higher of the two scores for final confidence
-        final_confidence = 0
-        if total_bullish_score > total_bearish_score:
-            final_confidence = (total_bullish_score / (total_bullish_score + total_bearish_score)) * 100 if (total_bullish_score + total_bearish_score) > 0 else 0
-        elif total_bearish_score > total_bullish_score:
-            final_confidence = (total_bearish_score / (total_bullish_score + total_bearish_score)) * 100 if (total_bullish_score + total_bearish_score) > 0 else 0
-        
+        # Calculate confidence based on the conviction of the weighted signals
+        if total_confidence_weight > 0:
+            # The confidence is the magnitude of the net score relative to the total conviction
+            confidence_score = (abs(net_score) / total_confidence_weight) * 100
+        else:
+            confidence_score = 0
+            
+        # Cap the final confidence at 80%
+        final_confidence = min(confidence_score, 80.0)
+
         current_long_position = portfolio.get("positions", {}).get(ticker, {}).get("long", 0)
-
-        # More decisive thresholds
-        if net_score > 50:  # Threshold for bullish signal
+        
+        action = "hold"
+        if net_score > 0.5:
             action = "buy"
-            reasoning = f"Strong bullish consensus for {ticker}. Total bullish score: {total_bullish_score:.2f} vs bearish: {total_bearish_score:.2f}."
-        elif net_score < -50: # Threshold for bearish signal
-            if current_long_position > 0:
-                action = "sell"
-                reasoning = f"Strong bearish consensus for {ticker}. Total bearish score: {total_bearish_score:.2f} vs bullish: {total_bullish_score:.2f}. Selling existing position."
-            else:
-                action = "short"
-                reasoning = f"Strong bearish consensus for {ticker}. Total bearish score: {total_bearish_score:.2f} vs bullish: {total_bullish_score:.2f}. Initiating short position."
+        elif net_score < -0.5:
+            action = "sell" if current_long_position > 0 else "short"
+
+        # Generate detailed, narrative-style reasoning
+        if action == "buy":
+            reasoning = (f"A strong bullish consensus has emerged for {ticker}, driven by positive signals from {', '.join(bullish_analysts)}. "
+                         f"The cumulative analysis, reflected in a net weighted score of {net_score:.2f}, points to a favorable risk/reward profile, justifying a new long position. "
+                         "This decision is based on a confluence of factors, including positive sentiment and strong fundamentals.")
+        elif action == "sell":
+            reasoning = (f"A significant bearish sentiment from {', '.join(bearish_analysts)} has prompted a defensive SELL action for {ticker}. "
+                         f"The analysis, with a net weighted score of {net_score:.2f}, suggests deteriorating fundamentals or unfavorable market conditions, warranting an exit from the current long position. "
+                         "This move is designed to preserve capital and mitigate downside risk.")
+        elif action == "short":
+            reasoning = (f"A compelling bearish case for {ticker} has been presented by {', '.join(bearish_analysts)}. "
+                         f"The net weighted score of {net_score:.2f} indicates a high-conviction shorting opportunity, based on the collective intelligence of the analyst swarm. "
+                         "This action is taken to capitalize on the anticipated downward price movement.")
+        else:
+            reasoning = (f"The analyst swarm holds a neutral stance on {ticker}, with a net weighted score of {net_score:.2f}. "
+                         f"The signals are mixed, with bullish conviction from {', '.join(bullish_analysts) if bullish_analysts else 'None'} "
+                         f"and bearish sentiment from {', '.join(bearish_analysts) if bearish_analysts else 'None'}. "
+                         "Holding the current position is the most prudent action until a clearer consensus emerges, avoiding unnecessary risk in a divided market.")
 
         # Calculate quantity
         quantity = 0
         if action in ["buy", "short"]:
-            # Scale quantity by confidence, up to max_shares
             quantity = int(max_shares.get(ticker, 0) * (final_confidence / 100))
         elif action == "sell":
-            # Sell a portion of the position based on confidence
             quantity = int(current_long_position * (final_confidence / 100))
         
-        # Ensure quantity is not zero if action is not 'hold'
         if action != "hold" and quantity == 0 and max_shares.get(ticker, 0) > 0:
-            quantity = 1 # trade at least one share if a decision is made
+            quantity = 1
 
         decisions[ticker] = PortfolioDecision(
             action=action,

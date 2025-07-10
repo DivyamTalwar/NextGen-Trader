@@ -33,16 +33,12 @@ def call_llm(
     
     # Extract model configuration if state is provided and agent_name is available
     if state and agent_name:
-        model_name, model_provider = get_agent_model_config(state, agent_name)
-    
-    # Fallback to defaults if still not provided
-    if not model_name:
-        model_name = "gpt-4o"
-    if not model_provider:
-        model_provider = "OPENAI"
+        model_name, model_provider, api_key = get_agent_model_config(state, agent_name)
+    else:
+        model_name, model_provider, api_key = "gpt-4o", "OpenAI", None
 
     model_info = get_model_info(model_name, model_provider)
-    llm = get_model(model_name, model_provider)
+    llm = get_model(model_name, model_provider, api_key=api_key)
 
     structured_llm = llm
     if model_info and model_info.has_json_mode():
@@ -124,26 +120,23 @@ def get_agent_model_config(state, agent_name):
     """
     Get model configuration for a specific agent from the state.
     Falls back to global model configuration if agent-specific config is not available.
+    Returns model_name, model_provider, and api_key.
     """
-    request = state.get("metadata", {}).get("request")
+    metadata = state.get("metadata", {})
+    
+    # Prioritize user-provided API key and model
+    user_api_key = metadata.get("api_key")
+    if user_api_key:
+        model_name = metadata.get("model_name")
+        model_provider = metadata.get("model_provider")
+        return model_name, model_provider, user_api_key
 
-    if agent_name == 'portfolio_manager':
-        # Get the model and provider from state metadata
-        model_name = state.get("metadata", {}).get("model_name", "gpt-4o")
-        model_provider = state.get("metadata", {}).get("model_provider", "OPENAI")
-        return model_name, model_provider
-    
-    if request and hasattr(request, 'get_agent_model_config'):
-        # Get agent-specific model configuration
-        model_name, model_provider = request.get_agent_model_config(agent_name)
-        return model_name, model_provider.value if hasattr(model_provider, 'value') else str(model_provider)
-    
-    # Fall back to global configuration
-    model_name = state.get("metadata", {}).get("model_name", "gpt-4o")
-    model_provider = state.get("metadata", {}).get("model_provider", "OPENAI")
+    # Fallback to pre-configured models
+    model_name = metadata.get("model_name", "gpt-4o")
+    model_provider = metadata.get("model_provider", "OpenAI")
     
     # Convert enum to string if necessary
     if hasattr(model_provider, 'value'):
         model_provider = model_provider.value
     
-    return model_name, model_provider
+    return model_name, model_provider, None

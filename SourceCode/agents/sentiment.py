@@ -76,10 +76,14 @@ def sentiment_analyst_agent(state: AgentState):
             overall_signal = "neutral"
 
         # Calculate confidence level based on the weighted proportion
-        total_weighted_signals = len(insider_signals) * insider_weight + len(news_signals) * news_weight
-        confidence = 0  # Default confidence when there are no signals
+        total_weighted_signals = bullish_signals + bearish_signals
+        confidence = 0
         if total_weighted_signals > 0:
-            confidence = round((max(bullish_signals, bearish_signals) / total_weighted_signals) * 100, 2)
+            net_signal_strength = abs(bullish_signals - bearish_signals)
+            confidence = (net_signal_strength / total_weighted_signals) * 100
+        
+        # Cap the confidence at 80%
+        confidence = min(confidence, 80.0)
         
         # Create structured reasoning similar to technical analysis
         reasoning = {

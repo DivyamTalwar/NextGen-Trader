@@ -128,7 +128,13 @@ def valuation_analyst_agent(state: AgentState):
         ) / total_weight
 
         signal = "bullish" if weighted_gap > 0.15 else "bearish" if weighted_gap < -0.15 else "neutral"
-        confidence = round(min(abs(weighted_gap) / 0.30 * 100, 100))
+        
+        # Calculate confidence based on the magnitude of the weighted gap
+        # A 30% gap represents high confidence
+        confidence = (abs(weighted_gap) / 0.30) * 100
+        
+        # Cap the confidence at 80%
+        confidence = min(confidence, 80.0)
 
         reasoning = {
             f"{m}_analysis": {

@@ -145,7 +145,13 @@ def fundamentals_analyst_agent(state: AgentState):
         net_score = bullish_signals - bearish_signals
 
         # Confidence is the magnitude of the net score relative to the total possible signals
-        confidence = round((abs(net_score) / total_signals) * 100)
+        if total_signals > 0:
+            confidence = (abs(net_score) / total_signals) * 100
+        else:
+            confidence = 0
+        
+        # Cap the confidence at 80%
+        confidence = min(confidence, 80.0)
 
         if net_score > 0:
             overall_signal = "bullish"

@@ -148,9 +148,13 @@ def stanley_druckenmiller_agent(state: AgentState):
             state=state,
         )
 
+        # Calculate confidence based on the total score
+        confidence = (total_score / max_possible_score) * 100
+        confidence = min(confidence, 80.0)
+
         druck_analysis[ticker] = {
             "signal": druck_output.signal,
-            "confidence": druck_output.confidence,
+            "confidence": confidence,
             "reasoning": druck_output.reasoning,
         }
 
