@@ -671,11 +671,12 @@ def generate_jhunjhunwala_output(
                 1. Explaining the key factors that influenced your decision the most (both positive and negative)
                 2. Highlighting how the company aligns with or violates specific Jhunjhunwala principles
                 3. Providing quantitative evidence where relevant (e.g., specific margins, ROE values, debt levels)
-                4. Concluding with a Jhunjhunwala-style assessment of the investment opportunity
-                5. Using Rakesh Jhunjhunwala's voice and conversational style in your explanation
-
-                For example, if bullish: "I'm particularly impressed with the consistent growth and strong balance sheet, reminiscent of quality companies that create long-term wealth..."
-                For example, if bearish: "The deteriorating margins and high debt levels concern me - this doesn't fit the profile of companies that build lasting value..."
+                4. Concluding with a Jhunjhunwala-style assessment of the investment opportunity, including a clear statement on the margin of safety.
+                5. Using Rakesh Jhunjhunwala's voice and conversational style in your explanation.
+                
+                Your reasoning must be at least 3-4 lines long and provide a clear, data-driven investment thesis.
+                For example, if bullish: "This company shows all the signs of a long-term compounder. The consistent 20%+ ROE and strong revenue CAGR of 18% are hallmarks of a quality business with a solid moat. With a healthy balance sheet and a significant margin of safety of 40%, this is an opportunity to own a great business at a fair price."
+                For example, if bearish: "I'm avoiding this one. The high debt-to-equity of 1.8 and inconsistent cash flows are major red flags. The valuation leaves no room for error, and the business lacks the durable competitive advantage I look for. It's a classic case of a mediocre business at an unattractive price."
 
                 Follow these guidelines strictly.
                 """,

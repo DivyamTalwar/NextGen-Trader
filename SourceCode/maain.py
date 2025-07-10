@@ -93,16 +93,36 @@ st.markdown(
         -webkit-background-clip: text;
         color: transparent;
         text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.8),
-            0 0 10px var(--neon-cyan),
-            0 0 20px var(--neon-cyan),
-            0 0 35px var(--electric-blue),
-            0 0 50px var(--amber-warning);
+            0 0 4px rgba(255, 255, 255, 0.3),
+            0 0 8px var(--neon-cyan),
+            0 0 18px var(--neon-cyan),
+            0 0 28px var(--electric-blue),
+            0 0 40px var(--electric-blue),
+            0 0 60px var(--amber-warning),
+            0 0 80px var(--amber-warning);
         animation: pulse-glow 3s infinite alternate;
     }
     @keyframes pulse-glow {
-        from { text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--electric-blue), 0 0 15px var(--amber-warning); }
-        to { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--electric-blue), 0 0 35px var(--amber-warning), 0 0 50px rgba(30, 136, 229, 0.7); }
+        from {
+            text-shadow:
+                0 0 4px rgba(255, 255, 255, 0.3),
+                0 0 8px var(--neon-cyan),
+                0 0 18px var(--neon-cyan),
+                0 0 28px var(--electric-blue),
+                0 0 40px var(--electric-blue),
+                0 0 60px var(--amber-warning),
+                0 0 80px var(--amber-warning);
+        }
+        to {
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, 0.5),
+                0 0 12px var(--neon-cyan),
+                0 0 22px var(--neon-cyan),
+                0 0 35px var(--electric-blue),
+                0 0 50px var(--electric-blue),
+                0 0 75px var(--amber-warning),
+                0 0 100px var(--amber-warning);
+        }
     }
 
     /* --- 3. Layout & Cards --- */
@@ -257,9 +277,13 @@ st.markdown(
         border: 2px solid var(--electric-blue);
         box-shadow: 0 0 8px var(--electric-blue) inset;
         border-radius: var(--border-radius);
-        color: var(--text-primary) !important;
         padding: calc(var(--spacing-unit) * 1.5);
         font-size: 1.1em;
+    }
+    /* Ensure text inside selectbox is visible and has enough space */
+    .stSelectbox [data-baseweb="select"] > div {
+        color: var(--text-primary) !important;
+        width: 100%;
     }
     .stSelectbox {
         width: 100% !important;
@@ -449,6 +473,81 @@ portfolio = {
     },
 }
 
+def create_workflow(selected_analysts=None):
+    """Creates the agent workflow graph."""
+    workflow = StateGraph(AgentState)
+    workflow.add_node("start_node", lambda state: state)
+    analyst_nodes = get_analyst_nodes()
+
+    if selected_analysts is None or not selected_analysts:
+        selected_analysts = list(analyst_nodes.keys())
+
+    for analyst_key in selected_analysts:
+        node_name, node_func = analyst_nodes[analyst_key]
+        workflow.add_node(node_name, node_func)
+        workflow.add_edge("start_node", node_name)
+
+    workflow.add_node("risk_management_agent", risk_management_agent)
+    workflow.add_node("portfolio_management_agent", portfolio_management_agent)
+
+    for analyst_key in selected_analysts:
+        node_name = analyst_nodes[analyst_key][0]
+        workflow.add_edge(node_name, "risk_management_agent")
+
+    workflow.add_edge("risk_management_agent", "portfolio_management_agent")
+    workflow.add_edge("portfolio_management_agent", END)
+    workflow.set_entry_point("start_node")
+
+    return workflow
+
+
+def run_agent_simulation(
+    tickers,
+    portfolio,
+    start_date,
+    end_date,
+    selected_analysts,
+    model_choice,
+    model_provider,
+    show_reasoning=True,
+    user_api_key=None,
+):
+    """Compiles and runs the agent graph, returning the final decisions."""
+    workflow = create_workflow(selected_analysts)
+    app = workflow.compile()
+
+    # Enhanced prompt to ensure detailed reasoning as requested.
+    prompt = (
+        "Make trading decisions based on the provided data. For each ticker, provide a detailed, "
+        "in-depth reasoning of at least 4 lines, explaining the key factors and analysis that led to the final action. "
+        "Go beyond surface-level comments and justify the trade with specific data points or analyst signals. "
+        "The final output must be a single JSON object where each key is a ticker. The value for each ticker should be another JSON object "
+        "with 'action' (buy, sell, short, cover, hold), 'quantity' (integer), 'confidence' (float from 0-100), and 'reasoning' (the detailed string)."
+    )
+
+    final_state = app.invoke({
+        "messages": [HumanMessage(content=prompt)],
+        "data": {
+            "tickers": tickers,
+            "portfolio": portfolio,
+            "start_date": start_date,
+            "end_date": end_date,
+            "analyst_signals": {},
+        },
+        "metadata": {
+            "show_reasoning": show_reasoning,
+            "model_name": model_choice,
+            "model_provider": model_provider,
+            "api_key": user_api_key,
+        },
+    })
+
+    decisions = json.loads(final_state["messages"][-1].content)
+    analyst_signals = final_state["data"]["analyst_signals"]
+
+    return {"decisions": decisions, "analyst_signals": analyst_signals}
+
+
 def run_hedge_fund(
     tickers,
     portfolio,
@@ -459,38 +558,12 @@ def run_hedge_fund(
     model_choice,
     model_provider,
     show_agent_graph,
+    user_api_key=None,
 ):
-    """Runs the hedge fund simulation."""
-    def create_workflow(selected_analysts=None):
-        workflow = StateGraph(AgentState)
-        workflow.add_node("start_node", lambda state: state)
-        analyst_nodes = get_analyst_nodes()
-
-        if selected_analysts is None or not selected_analysts:
-            selected_analysts = list(analyst_nodes.keys())
-
-        for analyst_key in selected_analysts:
-            node_name, node_func = analyst_nodes[analyst_key]
-            workflow.add_node(node_name, node_func)
-            workflow.add_edge("start_node", node_name)
-
-        workflow.add_node("risk_management_agent", risk_management_agent)
-        workflow.add_node("portfolio_management_agent", portfolio_management_agent)
-
-        for analyst_key in selected_analysts:
-            node_name = analyst_nodes[analyst_key][0]
-            workflow.add_edge(node_name, "risk_management_agent")
-
-        workflow.add_edge("risk_management_agent", "portfolio_management_agent")
-        workflow.add_edge("portfolio_management_agent", END)
-        workflow.set_entry_point("start_node")
-
-        return workflow
-
-    workflow = create_workflow(selected_analysts)
-    app = workflow.compile()
-
+    """Runs the hedge fund simulation and displays results in Streamlit."""
     if show_agent_graph:
+        workflow = create_workflow(selected_analysts)
+        app = workflow.compile()
         file_path = "agent_graph.png"
         save_graph_as_png(app, file_path)
         st.image(file_path, caption="Agent Graph", width=800)
@@ -498,25 +571,19 @@ def run_hedge_fund(
     with st.spinner("Running simulation... This may take a moment."):
         progress.start()
         try:
-            final_state = app.invoke({
-                "messages": [HumanMessage(content="Make trading decisions based on the provided data.")],
-                "data": {
-                    "tickers": tickers,
-                    "portfolio": portfolio,
-                    "start_date": start_date,
-                    "end_date": end_date,
-                    "analyst_signals": {},
-                },
-                "metadata": {
-                    "show_reasoning": show_reasoning,
-                    "model_name": model_choice,
-                    "model_provider": model_provider,
-                    "api_key": user_api_key,
-                },
-            })
-
-            decisions = json.loads(final_state["messages"][-1].content)
-            analyst_signals = final_state["data"]["analyst_signals"]
+            output = run_agent_simulation(
+                tickers=tickers,
+                portfolio=portfolio,
+                start_date=start_date,
+                end_date=end_date,
+                selected_analysts=selected_analysts,
+                model_choice=model_choice,
+                model_provider=model_provider,
+                show_reasoning=show_reasoning,
+                user_api_key=user_api_key,
+            )
+            decisions = output["decisions"]
+            analyst_signals = output["analyst_signals"]
 
             display_results(decisions, analyst_signals)
 
@@ -563,7 +630,8 @@ def display_results(decisions, analyst_signals):
                 """,
                 unsafe_allow_html=True,
             )
-            with st.expander("✅ View Reasoning"):
+            # The expander is now open by default to show the detailed reasoning immediately.
+            with st.expander("✅ View Reasoning", expanded=True):
                 st.markdown(f'<div class="reasoning-text" style="background: transparent; border: none; padding: 0;">{reasoning}</div>', unsafe_allow_html=True)
 
         st.markdown("<h4 style='margin-top: 40px;'>Analyst Intelligence Matrix</h4>", unsafe_allow_html=True)
@@ -623,13 +691,14 @@ if st.button("Run Hedge Fund Simulation"):
         st.warning("Please enter at least one ticker.")
     else:
         run_hedge_fund(
-            tickers,
-            portfolio,
-            start_date,
-            end_date,
-            selected_analysts,
-            show_reasoning,
-            model_choice,
-            model_provider,
-            show_agent_graph,
+            tickers=tickers,
+            portfolio=portfolio,
+            start_date=start_date,
+            end_date=end_date,
+            selected_analysts=selected_analysts,
+            show_reasoning=show_reasoning,
+            model_choice=model_choice,
+            model_provider=model_provider,
+            show_agent_graph=show_agent_graph,
+            user_api_key=user_api_key,
         )

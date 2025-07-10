@@ -3,7 +3,7 @@
 import json
 import time
 from pydantic import BaseModel
-from llm.models import get_model, get_model_info
+from llm.models import get_model, get_model_info, get_agent_model_config
 from utils.progress import progress
 from graph.state import AgentState
 
@@ -31,9 +31,9 @@ def call_llm(
         An instance of the specified Pydantic model
     """
     
-    # Extract model configuration if state is provided and agent_name is available
-    if state and agent_name:
-        model_name, model_provider, api_key = get_agent_model_config(state, agent_name)
+    # Extract model configuration if state is provided
+    if state:
+        model_name, model_provider, api_key = get_agent_model_config(state)
     else:
         model_name, model_provider, api_key = "gpt-4o", "OpenAI", None
 
@@ -114,29 +114,3 @@ def extract_json_from_response(content: str) -> dict | None:
     except Exception as e:
         print(f"Error extracting JSON from response: {e}")
     return None
-
-
-def get_agent_model_config(state, agent_name):
-    """
-    Get model configuration for a specific agent from the state.
-    Falls back to global model configuration if agent-specific config is not available.
-    Returns model_name, model_provider, and api_key.
-    """
-    metadata = state.get("metadata", {})
-    
-    # Prioritize user-provided API key and model
-    user_api_key = metadata.get("api_key")
-    if user_api_key:
-        model_name = metadata.get("model_name")
-        model_provider = metadata.get("model_provider")
-        return model_name, model_provider, user_api_key
-
-    # Fallback to pre-configured models
-    model_name = metadata.get("model_name", "gpt-4o")
-    model_provider = metadata.get("model_provider", "OpenAI")
-    
-    # Convert enum to string if necessary
-    if hasattr(model_provider, 'value'):
-        model_provider = model_provider.value
-    
-    return model_name, model_provider, None

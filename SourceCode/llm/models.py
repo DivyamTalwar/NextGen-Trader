@@ -11,6 +11,7 @@ from pydantic import BaseModel
 from typing import Tuple, List
 from pathlib import Path
 from typing import Union
+from graph.state import AgentState
 
 
 class ModelProvider(str, Enum):
@@ -130,3 +131,29 @@ def get_model(model_name: str, model_provider: ModelProvider, api_key: str = Non
             model=model_name,
             base_url=base_url,
         )
+
+
+def get_agent_model_config(state: AgentState) -> Tuple[str, str, str | None]:
+    """
+    Get model configuration for a specific agent from the state.
+    Falls back to global model configuration if agent-specific config is not available.
+    Returns model_name, model_provider, and api_key.
+    """
+    metadata = state.get("metadata", {})
+    
+    # Prioritize user-provided API key and model
+    user_api_key = metadata.get("api_key")
+    if user_api_key:
+        model_name = metadata.get("model_name")
+        model_provider = metadata.get("model_provider")
+        return model_name, model_provider, user_api_key
+
+    # Fallback to pre-configured models
+    model_name = metadata.get("model_name", "gpt-4o")
+    model_provider = metadata.get("model_provider", "OpenAI")
+    
+    # Convert enum to string if necessary
+    if hasattr(model_provider, 'value'):
+        model_provider = model_provider.value
+    
+    return model_name, model_provider, None

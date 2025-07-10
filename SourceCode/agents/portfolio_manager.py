@@ -1,9 +1,12 @@
 import json
 from langchain_core.messages import HumanMessage
+from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
+from llm.models import get_model, get_agent_model_config
 from utils.progress import progress
 from graph.state import AgentState, show_agent_reasoning
+
 
 class PortfolioDecision(BaseModel):
     action: Literal["buy", "sell", "short", "cover", "hold"]
@@ -14,50 +17,53 @@ class PortfolioDecision(BaseModel):
 class PortfolioManagerOutput(BaseModel):
     decisions: dict[str, PortfolioDecision] = Field(description="Dictionary of ticker to trading decisions")
 
-def make_deterministic_decision(signals_by_ticker: dict, max_shares: dict, portfolio: dict) -> PortfolioManagerOutput:
+def generate_portfolio_decisions(
+    signals_by_ticker: dict, max_shares: dict, portfolio: dict, state: AgentState
+) -> PortfolioManagerOutput:
     """
-    Makes a deterministic trading decision based on aggregated analyst signals,
-    weighted by confidence scores, and generates detailed, narrative-style reasoning.
+    Makes a deterministic trading decision for action/quantity, but uses an LLM
+    to synthesize a detailed, narrative-style reasoning based on all analyst inputs.
     """
+    model_name, model_provider, api_key = get_agent_model_config(state)
+    llm = get_model(model_name, model_provider, api_key=api_key)
     decisions = {}
+
     for ticker, signals in signals_by_ticker.items():
         if not signals:
             decisions[ticker] = PortfolioDecision(
                 action="hold",
                 quantity=0,
                 confidence=0.0,
-                reasoning=f"Insufficient data: No analyst signals were provided for {ticker}."
+                reasoning=f"Insufficient data: No analyst signals were provided for {ticker}.",
             )
             continue
 
-        weighted_bullish_score = 0
-        weighted_bearish_score = 0
-        bullish_analysts = []
-        bearish_analysts = []
+        # --- Deterministic part: Calculate action, quantity, confidence ---
+        weighted_bullish_score, weighted_bearish_score = 0, 0
+        all_reasonings = []
 
         for agent, signal_data in signals.items():
-            confidence = signal_data.get('confidence', 0) / 100.0
+            confidence = signal_data.get("confidence", 0) / 100.0
             agent_name = agent.replace("_agent", "").replace("_", " ").title()
-            if signal_data.get('signal') == 'bullish':
+            signal = signal_data.get("signal")
+            reasoning = signal_data.get("reasoning", "No reasoning provided.")
+
+            if signal == "bullish":
                 weighted_bullish_score += confidence
-                bullish_analysts.append(f"{agent_name} ({confidence:.0%})")
-            elif signal_data.get('signal') == 'bearish':
+            elif signal == "bearish":
                 weighted_bearish_score += confidence
-                bearish_analysts.append(f"{agent_name} ({confidence:.0%})")
+            
+            all_reasonings.append(f"--- Analyst: {agent_name} ({signal}) ---\n{reasoning}\n")
 
         net_score = weighted_bullish_score - weighted_bearish_score
         total_confidence_weight = weighted_bullish_score + weighted_bearish_score
 
-        # Calculate confidence based on the conviction of the weighted signals
         if total_confidence_weight > 0:
-            # The confidence is the magnitude of the net score relative to the total conviction
             confidence_score = (abs(net_score) / total_confidence_weight) * 100
         else:
             confidence_score = 0
-            
-        # Cap the final confidence at 80%
+        
         final_confidence = min(confidence_score, 80.0)
-
         current_long_position = portfolio.get("positions", {}).get(ticker, {}).get("long", 0)
         
         action = "hold"
@@ -66,26 +72,6 @@ def make_deterministic_decision(signals_by_ticker: dict, max_shares: dict, portf
         elif net_score < -0.5:
             action = "sell" if current_long_position > 0 else "short"
 
-        # Generate detailed, narrative-style reasoning
-        if action == "buy":
-            reasoning = (f"A strong bullish consensus has emerged for {ticker}, driven by positive signals from {', '.join(bullish_analysts)}. "
-                         f"The cumulative analysis, reflected in a net weighted score of {net_score:.2f}, points to a favorable risk/reward profile, justifying a new long position. "
-                         "This decision is based on a confluence of factors, including positive sentiment and strong fundamentals.")
-        elif action == "sell":
-            reasoning = (f"A significant bearish sentiment from {', '.join(bearish_analysts)} has prompted a defensive SELL action for {ticker}. "
-                         f"The analysis, with a net weighted score of {net_score:.2f}, suggests deteriorating fundamentals or unfavorable market conditions, warranting an exit from the current long position. "
-                         "This move is designed to preserve capital and mitigate downside risk.")
-        elif action == "short":
-            reasoning = (f"A compelling bearish case for {ticker} has been presented by {', '.join(bearish_analysts)}. "
-                         f"The net weighted score of {net_score:.2f} indicates a high-conviction shorting opportunity, based on the collective intelligence of the analyst swarm. "
-                         "This action is taken to capitalize on the anticipated downward price movement.")
-        else:
-            reasoning = (f"The analyst swarm holds a neutral stance on {ticker}, with a net weighted score of {net_score:.2f}. "
-                         f"The signals are mixed, with bullish conviction from {', '.join(bullish_analysts) if bullish_analysts else 'None'} "
-                         f"and bearish sentiment from {', '.join(bearish_analysts) if bearish_analysts else 'None'}. "
-                         "Holding the current position is the most prudent action until a clearer consensus emerges, avoiding unnecessary risk in a divided market.")
-
-        # Calculate quantity
         quantity = 0
         if action in ["buy", "short"]:
             quantity = int(max_shares.get(ticker, 0) * (final_confidence / 100))
@@ -95,11 +81,53 @@ def make_deterministic_decision(signals_by_ticker: dict, max_shares: dict, portf
         if action != "hold" and quantity == 0 and max_shares.get(ticker, 0) > 0:
             quantity = 1
 
+        # --- LLM part: Synthesize the final reasoning ---
+        reasoning_prompt_template = """
+You are 'The Apex Predator' of Wall Street, the legendary Head of Strategy at 'Quantum Alpha', an elite AI-powered hedge fund feared for its aggressive, precise, and brutally profitable trades. Your word is final. Your team of specialist AI analysts has provided their intelligence. Your job is to distill their complex, often conflicting, analyses into a single, razor-sharp investment thesis that justifies the firm's capital deployment.
+
+**Asset:** {ticker}
+**Final Verdict:** {action}
+**Conviction Score:** {confidence:.1f}%
+
+**Intelligence Briefing from the Analyst Swarm:**
+{all_reasonings}
+---
+**Your Mandate:**
+
+Forge the **Official Investment Thesis**. This is not a summary; it is the definitive, authoritative rationale for our market action. Your language must be ruthlessly efficient, powerful, and dripping with conviction.
+
+**Structure the thesis with these exact headings:**
+
+1.  **Executive Summary:** A single, powerful sentence declaring the verdict and the primary driver.
+2.  **The Bull Case:** Synthesize the strongest arguments FOR the position. Weave the bullish signals into a coherent narrative, quantifying with key metrics.
+3.  **The Bear Case:** Do the same for the bearish arguments. What are the primary risks and headwinds? Be specific and quantitative.
+4.  **The Verdict:** This is the final word. In a concise, hard-hitting paragraph, weigh the bull vs. bear case and state the single most critical factor (the 'linchpin') that forced the decision. This is the "why" behind our move. No fluff, no conclusion, just the final, decisive judgment.
+
+**Crucial Directives:**
+-   **Absolute Conviction:** Use decisive, powerful language. Eliminate all hedging and ambiguity.
+-   **Synthesize, Never Summarize:** Connect the dots between analysts. Show how their combined intelligence leads to a conclusion that is greater than the sum of its parts.
+-   **Ruthless Efficiency:** Every word must serve the thesis. Cut all fluff. The output must be dense with insight.
+-   **Factual Grounding:** You MUST ground all quantitative claims and comparisons in the analyst reasonings. Do not invent or misrepresent figures. Your reputation for brutal accuracy is on the line.
+
+**Official Investment Thesis for the Record:**
+"""
+        reasoning_prompt = ChatPromptTemplate.from_template(reasoning_prompt_template)
+        reasoning_chain = reasoning_prompt | llm
+        
+        response = reasoning_chain.invoke({
+            "ticker": ticker,
+            "action": action.upper(),
+            "confidence": final_confidence,
+            "all_reasonings": "\n".join(all_reasonings)
+        })
+        
+        synthesized_reasoning = response.content
+
         decisions[ticker] = PortfolioDecision(
             action=action,
             quantity=quantity,
             confidence=final_confidence,
-            reasoning=reasoning
+            reasoning=synthesized_reasoning,
         )
         
     return PortfolioManagerOutput(decisions=decisions)
@@ -129,13 +157,18 @@ def portfolio_management_agent(state: AgentState):
         ticker_signals = {}
         for agent, signals in analyst_signals.items():
             if agent != "risk_management_agent" and ticker in signals:
-                ticker_signals[agent] = {"signal": signals[ticker]["signal"], "confidence": signals[ticker]["confidence"]}
+                # Collect the full signal data, including the reasoning from each analyst.
+                ticker_signals[agent] = {
+                    "signal": signals[ticker]["signal"],
+                    "confidence": signals[ticker]["confidence"],
+                    "reasoning": signals[ticker].get("reasoning", "No reasoning provided."),
+                }
         signals_by_ticker[ticker] = ticker_signals
 
     progress.update_status("portfolio_manager", None, "Generating trading decisions")
 
-    # Use the deterministic function instead of an LLM call
-    result = make_deterministic_decision(signals_by_ticker, max_shares, portfolio)
+    # Generate decisions, using an LLM to synthesize the final reasoning.
+    result = generate_portfolio_decisions(signals_by_ticker, max_shares, portfolio, state)
 
     message = HumanMessage(
         content=json.dumps({ticker: decision.model_dump() for ticker, decision in result.decisions.items()}),

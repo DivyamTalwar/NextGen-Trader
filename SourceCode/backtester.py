@@ -9,7 +9,7 @@ import numpy as np
 import itertools
 from .llm.models import LLM_ORDER,OLLAMA_LLM_ORDER,get_model_info,ModelProvider
 from .utils.analysts import ANALYST_ORDER
-from .maain import run_hedge_fund
+from .maain import run_agent_simulation
 from .tools.api import(
     get_company_news,
     get_price_data,
@@ -28,7 +28,6 @@ init(autoreset=True)
 class Backtester:
     def __init__(
         self,
-        agent: Callable,
         tickers: list[str],
         start_date: str,
         end_date: str,
@@ -39,7 +38,6 @@ class Backtester:
         initial_margin_requirement: float = 0.0,
     ):
         """
-        :param agent: The trading agent (Callable).
         :param tickers: List of tickers to backtest.
         :param start_date: Start date string (YYYY-MM-DD).
         :param end_date: End date string (YYYY-MM-DD).
@@ -49,7 +47,6 @@ class Backtester:
         :param selected_analysts: List of analyst names or IDs to incorporate.
         :param initial_margin_requirement: The margin ratio (e.g. 0.5 = 50%).
         """
-        self.agent = agent
         self.tickers = tickers
         self.start_date = start_date
         self.end_date = end_date
@@ -335,12 +332,12 @@ class Backtester:
             # ---------------------------------------------------------------
             # 1) Execute the agent's trades
             # ---------------------------------------------------------------
-            output = self.agent(
+            output = run_agent_simulation(
                 tickers=self.tickers,
                 start_date=lookback_start,
                 end_date=current_date_str,
                 portfolio=self.portfolio,
-                model_name=self.model_name,
+                model_choice=self.model_name,
                 model_provider=self.model_provider,
                 selected_analysts=self.selected_analysts,
             )
@@ -750,7 +747,6 @@ if __name__ == "__main__":
 
     # Create and run the backtester
     backtester = Backtester(
-        agent=run_hedge_fund,
         tickers=tickers,
         start_date=args.start_date,
         end_date=args.end_date,

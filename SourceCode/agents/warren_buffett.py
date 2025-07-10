@@ -810,16 +810,17 @@ def generate_buffett_output(
                   "reasoning": "string with your detailed Warren Buffett-style analysis"
                 }}
 
-                In your reasoning, be specific about:
-                1. Whether this falls within your circle of competence and why (CRITICAL FIRST STEP)
-                2. Your assessment of the business's competitive moat
-                3. Management quality and capital allocation
-                4. Financial health and consistency
-                5. Valuation relative to intrinsic value
-                6. Long-term prospects and any red flags
-                7. How this compares to opportunities in your portfolio
+                In your reasoning, be specific and provide a detailed, 3-4 line analysis covering:
+                1. Circle of Competence: State clearly if the business is understandable and why.
+                2. Economic Moat: Describe the nature and durability of the competitive advantage, referencing data like high ROIC or stable margins.
+                3. Management & Financials: Comment on management's shareholder-friendliness (e.g., buybacks) and the company's financial strength (e.g., low debt).
+                4. Valuation: Explicitly state whether the company is trading at a discount to your calculated intrinsic value, providing a clear margin of safety.
+                
+                Combine these points into a cohesive, convincing narrative in my voice. Be direct, use simple language, and ground your final judgment in the provided data.
 
-                Write as Warren Buffett would speak - plainly, with conviction, and with specific references to the data provided.
+                **Crucial Directives:**
+                -   **Factual Grounding:** You MUST ground all quantitative claims and comparisons in the provided analysis data. Do not invent or misrepresent figures.
+                -   **Final Sanity Check:** Before writing, perform a final sanity check on all quantitative claims and comparisons. Ensure all numbers are logically consistent (e.g., a lower value is not claimed to be higher). Your reputation for brutal accuracy is on the line.
                 """,
             ),
         ]
