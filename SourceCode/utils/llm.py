@@ -58,8 +58,22 @@ def call_llm(
                 parsed_result = extract_json_from_response(result.content)
                 if parsed_result:
                     return pydantic_model(**parsed_result)
-            else:
+                else:
+                    # Handle cases where JSON extraction fails
+                    if default_factory:
+                        return default_factory()
+                    return create_default_response(pydantic_model)
+            
+            # For JSON-supported models, the result should already be the Pydantic model
+            if isinstance(result, pydantic_model):
                 return result
+            else:
+                # If the result is not the expected model, it might be a fallback scenario
+                # or an unexpected response format. Log it and use a default.
+                print(f"Warning: LLM returned unexpected type {type(result)} for {agent_name}")
+                if default_factory:
+                    return default_factory()
+                return create_default_response(pydantic_model)
 
         except Exception as e:
             if agent_name:

@@ -157,11 +157,36 @@ def portfolio_management_agent(state: AgentState):
         ticker_signals = {}
         for agent, signals in analyst_signals.items():
             if agent != "risk_management_agent" and ticker in signals:
-                # Collect the full signal data, including the reasoning from each analyst.
+                signal_data = signals[ticker]
+                
+                # Handle cases where a raw AIMessage might be returned
+                if hasattr(signal_data, 'content'):
+                    try:
+                        # Try to parse the content if it's a JSON string
+                        content_dict = json.loads(signal_data.content)
+                        reasoning = content_dict.get("reasoning", "No reasoning provided.")
+                        signal = content_dict.get("signal", "neutral")
+                        confidence = content_dict.get("confidence", 0)
+                    except (json.JSONDecodeError, TypeError):
+                        # If content is not a valid JSON, treat it as the reasoning string
+                        reasoning = signal_data.content
+                        signal = "neutral" # Default signal if not parsable
+                        confidence = 0 # Default confidence
+                elif isinstance(signal_data, dict):
+                    # This is the expected case where signal_data is a dict
+                    reasoning = signal_data.get("reasoning", "No reasoning provided.")
+                    signal = signal_data.get("signal", "neutral")
+                    confidence = signal_data.get("confidence", 0)
+                else:
+                    # Fallback for unexpected types
+                    reasoning = "Unsupported signal format"
+                    signal = "neutral"
+                    confidence = 0
+
                 ticker_signals[agent] = {
-                    "signal": signals[ticker]["signal"],
-                    "confidence": signals[ticker]["confidence"],
-                    "reasoning": signals[ticker].get("reasoning", "No reasoning provided."),
+                    "signal": signal,
+                    "confidence": confidence,
+                    "reasoning": reasoning,
                 }
         signals_by_ticker[ticker] = ticker_signals
 
