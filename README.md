@@ -44,12 +44,10 @@
 
 ---
 
-### **🎬 Live Demo: The Titans in Action**
+### **🎬 The System in Action**
 <div align="center">
-  <p><em>(Placeholder for a terminal recording GIF showing the agentic debate and final output)</em></p>
-  <a href="#">
-    <img src="https://user-images.githubusercontent.com/10646533/173832290-222c60a1-2763-421c-835b-59288404b36a.gif" alt="Live Demo GIF" width="90%"/>
-  </a>
+  <p>Visualizing the agentic network—a constant, dynamic exchange of ideas and data.</p>
+  <img src="https://i.pinimg.com/originals/0e/b9/4c/0eb94c14e523c676b46293595ea7507a.gif" alt="Agent Network" width="90%"/>
 </div>
 
 ---
@@ -85,6 +83,38 @@ NextGen-Trader is not a monolithic program. It's a living, breathing superorgani
   <img src="https://github.com/DivyamTalwar/NextGen-Trader/blob/main/SourceCode/analyst_workflow_graph.png?raw=true" alt="Analyst Workflow" width="90%"/>
   <p><em>The cyclical flow of information and decision-making, orchestrated by LangGraph.</em></p>
 </div>
+
+---
+
+### **✨ Code Spotlight: The Anatomy of an Agent**
+Elegance in code is not a luxury; it's a requirement. Here’s a glimpse into how an agent thinks. This is not just code; it's philosophy, operationalized.
+
+```python
+# SourceCode/agents/warren_buffett.py (Illustrative Example)
+from ..graph import AgentNode, AgentState
+
+class WarrenBuffettNode(AgentNode):
+    def think(self, state: AgentState) -> dict:
+        """
+        Analyzes the market through the lens of value investing.
+        Focuses on intrinsic value, durable competitive advantages (moats),
+        and a non-negotiable margin of safety.
+        """
+        # 1. Filter for companies with strong, understandable fundamentals
+        quality_companies = self.tools.fundamentals.filter_by_pe_ratio(
+            state.market_data, max_pe=15
+        )
+
+        # 2. Analyze for durable competitive advantages (moats)
+        companies_with_moats = self.tools.qualitative.find_moats(quality_companies)
+
+        # 3. Propose investments only if there is a significant margin of safety
+        proposal = self.propose_investment(
+            companies_with_moats, margin_of_safety=0.5
+        )
+
+        return {"proposal": proposal}
+```
 
 ---
 
@@ -134,7 +164,7 @@ Create a `.env` file from the root directory. This is your command console.
 ```env
 # .env: Your secret keys to power the machine
 OPENAI_API_KEY="sk-..."
-TAVILY_API_KEY="..."
+FINANCIAL_DATASETS_API_KEY="..."
 # Add other necessary API keys for data providers
 ```
 
