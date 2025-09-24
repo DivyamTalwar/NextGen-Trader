@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/D:\\NextGenTrader\\SourceCode/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\agents/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\agents/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\graph/**)",
+      "Read(*)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\api\\routers/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\utils/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\tools/**)",
+      "Read(/D:\\NextGenTrader\\SourceCode\\api/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

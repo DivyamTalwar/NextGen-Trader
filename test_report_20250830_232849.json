@@ -1,0 +1,590 @@
+{
+  "timestamp": "2025-08-30T23:28:41.531015",
+  "total_tests": 95,
+  "passed": 94,
+  "failed": 1,
+  "errors": [
+    {
+      "category": "module",
+      "test": "backtester",
+      "error": "attempted relative import with no known parent package",
+      "details": ""
+    }
+  ],
+  "warnings": [],
+  "module_tests": {
+    "module": [
+      {
+        "name": "api.routers.agents",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.agents",
+        "error": ""
+      },
+      {
+        "name": "api.routers.beast_agents",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.beast_agents",
+        "error": ""
+      },
+      {
+        "name": "api.routers.portfolio",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.portfolio",
+        "error": ""
+      },
+      {
+        "name": "api.routers.backtesting",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.backtesting",
+        "error": ""
+      },
+      {
+        "name": "api.routers.data",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.data",
+        "error": ""
+      },
+      {
+        "name": "api.routers.workflow",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.workflow",
+        "error": ""
+      },
+      {
+        "name": "api.routers.models",
+        "status": "PASS",
+        "details": "Successfully imported api.routers.models",
+        "error": ""
+      },
+      {
+        "name": "api.schemas",
+        "status": "PASS",
+        "details": "Successfully imported api.schemas",
+        "error": ""
+      },
+      {
+        "name": "agents.warren_buffett",
+        "status": "PASS",
+        "details": "Successfully imported agents.warren_buffett",
+        "error": ""
+      },
+      {
+        "name": "agents.phil_fisher",
+        "status": "PASS",
+        "details": "Successfully imported agents.phil_fisher",
+        "error": ""
+      },
+      {
+        "name": "agents.ben_graham",
+        "status": "PASS",
+        "details": "Successfully imported agents.ben_graham",
+        "error": ""
+      },
+      {
+        "name": "agents.aswath_damodaran",
+        "status": "PASS",
+        "details": "Successfully imported agents.aswath_damodaran",
+        "error": ""
+      },
+      {
+        "name": "agents.bill_ackman",
+        "status": "PASS",
+        "details": "Successfully imported agents.bill_ackman",
+        "error": ""
+      },
+      {
+        "name": "agents.cathie_wood",
+        "status": "PASS",
+        "details": "Successfully imported agents.cathie_wood",
+        "error": ""
+      },
+      {
+        "name": "agents.charlie_munger",
+        "status": "PASS",
+        "details": "Successfully imported agents.charlie_munger",
+        "error": ""
+      },
+      {
+        "name": "agents.stanley_druckenmiller",
+        "status": "PASS",
+        "details": "Successfully imported agents.stanley_druckenmiller",
+        "error": ""
+      },
+      {
+        "name": "agents.rakesh_jhunjhunwala",
+        "status": "PASS",
+        "details": "Successfully imported agents.rakesh_jhunjhunwala",
+        "error": ""
+      },
+      {
+        "name": "agents.fundamentals",
+        "status": "PASS",
+        "details": "Successfully imported agents.fundamentals",
+        "error": ""
+      },
+      {
+        "name": "agents.valuation",
+        "status": "PASS",
+        "details": "Successfully imported agents.valuation",
+        "error": ""
+      },
+      {
+        "name": "agents.technicals",
+        "status": "PASS",
+        "details": "Successfully imported agents.technicals",
+        "error": ""
+      },
+      {
+        "name": "agents.sentiment",
+        "status": "PASS",
+        "details": "Successfully imported agents.sentiment",
+        "error": ""
+      },
+      {
+        "name": "agents.risk_manager",
+        "status": "PASS",
+        "details": "Successfully imported agents.risk_manager",
+        "error": ""
+      },
+      {
+        "name": "agents.portfolio_manager",
+        "status": "PASS",
+        "details": "Successfully imported agents.portfolio_manager",
+        "error": ""
+      },
+      {
+        "name": "agents.quantum_market_dynamics",
+        "status": "PASS",
+        "details": "Successfully imported agents.quantum_market_dynamics",
+        "error": ""
+      },
+      {
+        "name": "agents.neural_sentiment_predictor",
+        "status": "PASS",
+        "details": "Successfully imported agents.neural_sentiment_predictor",
+        "error": ""
+      },
+      {
+        "name": "graph.state",
+        "status": "PASS",
+        "details": "Successfully imported graph.state",
+        "error": ""
+      },
+      {
+        "name": "data.cache",
+        "status": "PASS",
+        "details": "Successfully imported data.cache",
+        "error": ""
+      },
+      {
+        "name": "data.models",
+        "status": "PASS",
+        "details": "Successfully imported data.models",
+        "error": ""
+      },
+      {
+        "name": "llm.models",
+        "status": "PASS",
+        "details": "Successfully imported llm.models",
+        "error": ""
+      },
+      {
+        "name": "tools.api",
+        "status": "PASS",
+        "details": "Successfully imported tools.api",
+        "error": ""
+      },
+      {
+        "name": "utils.analysts",
+        "status": "PASS",
+        "details": "Successfully imported utils.analysts",
+        "error": ""
+      },
+      {
+        "name": "utils.display",
+        "status": "PASS",
+        "details": "Successfully imported utils.display",
+        "error": ""
+      },
+      {
+        "name": "utils.llm",
+        "status": "PASS",
+        "details": "Successfully imported utils.llm",
+        "error": ""
+      },
+      {
+        "name": "utils.ollama",
+        "status": "PASS",
+        "details": "Successfully imported utils.ollama",
+        "error": ""
+      },
+      {
+        "name": "utils.progress",
+        "status": "PASS",
+        "details": "Successfully imported utils.progress",
+        "error": ""
+      },
+      {
+        "name": "utils.visualize",
+        "status": "PASS",
+        "details": "Successfully imported utils.visualize",
+        "error": ""
+      },
+      {
+        "name": "backtester",
+        "status": "FAIL",
+        "details": "",
+        "error": "attempted relative import with no known parent package"
+      }
+    ]
+  },
+  "api_tests": {},
+  "agent_tests": {
+    "agent": [
+      {
+        "name": "beast_warren_buffett_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "beast_warren_buffett_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "beast_warren_buffett_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "buffett_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "buffett_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "buffett_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "warren_buffett_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "warren_buffett_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "warren_buffett_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "phil_fisher_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "phil_fisher_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "phil_fisher_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "ben_graham_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "ben_graham_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "ben_graham_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "aswath_damodaran_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "aswath_damodaran_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "aswath_damodaran_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "bill_ackman_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "bill_ackman_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "bill_ackman_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "cathie_wood_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "cathie_wood_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "cathie_wood_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "charlie_munger_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "charlie_munger_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "charlie_munger_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "stanley_druckenmiller_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "stanley_druckenmiller_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "stanley_druckenmiller_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "rakesh_jhunjhunwala_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "rakesh_jhunjhunwala_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "rakesh_jhunjhunwala_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "fundamentals_analyst_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "fundamentals_analyst_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "fundamentals_analyst_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "valuation_analyst_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "valuation_analyst_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "valuation_analyst_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "technical_analyst_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "technical_analyst_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "technical_analyst_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "sentiment_analyst_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "sentiment_analyst_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "sentiment_analyst_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "risk_management_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "risk_management_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "risk_management_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "portfolio_management_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "portfolio_management_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "portfolio_management_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "quantum_market_dynamics_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "quantum_market_dynamics_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "quantum_market_dynamics_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "neural_sentiment_predictor_agent_state_0",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "neural_sentiment_predictor_agent_state_1",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      },
+      {
+        "name": "neural_sentiment_predictor_agent_state_2",
+        "status": "PASS",
+        "details": "Agent function exists with params: ['state']",
+        "error": ""
+      }
+    ]
+  },
+  "stress_tests": {},
+  "integration_tests": {}
+}

@@ -1704,3 +1704,7 @@ def generate_beast_buffett_output(ticker: str, analysis_data: dict,
         state=state,
         default_factory=create_default
     )
+
+# Aliases for compatibility
+warren_buffett_agent = beast_warren_buffett_agent
+buffett_agent = beast_warren_buffett_agent

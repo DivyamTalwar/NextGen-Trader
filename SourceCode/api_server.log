@@ -1,0 +1,487 @@
+2025-08-30 23:29:55.605 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:55.605 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.196 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run api_server.py [ARGUMENTS]
+2025-08-30 23:29:56.196 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.196 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Session state does not function when running a script without `streamlit run`
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.198 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.199 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.200 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:29:56.201 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+INFO:     Will watch for changes in these directories: ['D:\\NextGenTrader\\SourceCode']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [3220] using WatchFiles
+2025-08-30 23:30:01.407 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:01.408 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit: 
+  [33m[1mWarning:[0m to view a Streamlit app on a browser, use Streamlit in a file and
+  run it with the following command:
+
+    streamlit run [FILE_NAME] [ARGUMENTS]
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.021 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.state.session_state_proxy: Session state does not function when running a script without `streamlit run`
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.022 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.023 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.025 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.026 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2025-08-30 23:30:02.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+INFO:     Started server process [16788]
+INFO:     Waiting for application startup.
+2025-08-30 23:30:02,323 - api_server - INFO - NextGenTrader API Server starting up...
+2025-08-30 23:30:02,323 - api_server - INFO - Environment: development
+2025-08-30 23:30:02,323 - api_server - INFO - All routers loaded successfully
+INFO:     Application startup complete.
+INFO:     127.0.0.1:52308 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52342 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52349 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52351 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52353 - "GET /api/agents/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52360 - "GET /api/agents/agent/warren_buffett/info HTTP/1.1" 200 OK
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  },
+  "MSFT": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52362 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52377 - "GET /api/beast/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52384 - "GET /api/beast/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52403 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52408 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52410 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52417 - "GET /api/agents/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52419 - "GET /api/agents/agent/warren_buffett/info HTTP/1.1" 200 OK
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  },
+  "MSFT": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52421 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52425 - "GET /api/beast/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52433 - "GET /api/beast/health HTTP/1.1" 200 OK
+2025-08-30 23:33:45,085 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-08-30 23:33:45,434 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-08-30 23:33:45,757 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+Error in LLM call after 3 attempts: Error code: 401 - {'error': {'message': 'Incorrect API key provided: lsv2_pt_***************************************2741. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52435 - "POST /api/beast/analyze/warren_buffett HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52552 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52556 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52559 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52561 - "GET /api/agents/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52565 - "GET /api/beast/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52567 - "GET /api/agents/agent/warren_buffett/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52569 - "GET /api/agents/agent/phil_fisher/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52571 - "GET /api/agents/agent/ben_graham/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52573 - "GET /api/agents/agent/invalid_agent/info HTTP/1.1" 404 Not Found
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52576 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  },
+  "MSFT": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  },
+  "GOOGL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52578 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52593 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52596 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52606 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52608 - "GET /api/agents/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52613 - "GET /api/beast/agents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52619 - "GET /api/agents/agent/warren_buffett/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52621 - "GET /api/agents/agent/phil_fisher/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52675 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52684 - "GET /api/agents/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52686 - "GET /api/beast/agents HTTP/1.1" 200 OK
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52688 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52697 - "POST /api/beast/analyze/beast-mode HTTP/1.1" 404 Not Found
+Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52719 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
+2025-08-30 23:38:23,209 - watchfiles.main - INFO - 5 changes detected
+WARNING:  WatchFiles detected changes in 'api\routers\agents.py'. Reloading...
+ Error in LLM call after 3 attempts: 'NoneType' object has no attribute 'invoke'
+
+==========  BEAST Warren Buffett Agent  ==========
+{
+  "AAPL": {
+    "signal": "neutral",
+    "confidence": 0.0,
+    "reasoning": "Analysis error - defaulting to neutral",
+    "moat_score": 0.0,
+    "intrinsic_value": 0.0,
+    "margin_of_safety": 0.0,
+    "risk_adjusted_return": 0.0,
+    "time_horizon": "Unknown",
+    "catalysts": [],
+    "risk_factors": [],
+    "quantum_score": 0.0
+  }
+}
+================================================
+INFO:     127.0.0.1:52844 - "POST /api/agents/analyze/warren_buffett HTTP/1.1" 500 Internal Server Error
