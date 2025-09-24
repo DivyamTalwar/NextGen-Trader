@@ -2,3 +2,4 @@ venv
 .env
 New Microsoft Word Document.docx
 test.py
+__pycache__
